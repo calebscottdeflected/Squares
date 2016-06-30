@@ -115,6 +115,5 @@ IBOutlet UIImageView *Square1;
 -(IBAction)WOne29;
 -(IBAction)WOne30;
 -(IBAction)QuitW1;
----
 @end
 
