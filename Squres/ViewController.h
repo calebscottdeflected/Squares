@@ -18,7 +18,7 @@ int ColorSquarePicker;
 int Left;
 NSInteger worldandlvl;
 NSInteger level;
-
+//HI this is caleb
 @interface ViewController : UIViewController{
 
 IBOutlet UIImageView *Square1;
