@@ -75,6 +75,8 @@ IBOutlet UIImageView *Square1;
     IBOutlet UILabel *BlrW29;
     IBOutlet UILabel *BlrW30;
 }
+
+
 -(IBAction)Start:(id)sender;
 -(IBAction)Time;
 -(IBAction)Randomiser;

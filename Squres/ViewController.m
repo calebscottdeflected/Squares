@@ -13,6 +13,18 @@
 @end
 
 @implementation ViewController
+
+
+
+
+
+
+
+
+
+
+
+
 -(IBAction)QuitW1{
     [[NSUserDefaults standardUserDefaults] setInteger:worldandlvl forKey:@"level"];
 

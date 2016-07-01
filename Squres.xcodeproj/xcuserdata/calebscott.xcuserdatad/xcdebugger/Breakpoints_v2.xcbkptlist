@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Squres/ViewController.m"
-            timestampString = "488847169.626546"
+            timestampString = "489040916.867607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2278"
-            endingLineNumber = "2278"
+            startingLineNumber = "2290"
+            endingLineNumber = "2290"
             landmarkName = "-WOne12"
             landmarkType = "7">
          </BreakpointContent>
