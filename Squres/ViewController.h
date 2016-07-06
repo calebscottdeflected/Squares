@@ -18,9 +18,26 @@ int ColorSquarePicker;
 int Left;
 NSInteger worldandlvl;
 NSInteger level;
+NSInteger world2andlvl;
+NSInteger level2;
+int Left2;
+int TimeI2;
+int ColorSquare2;
+
+int W2SquareColor1;
+int W2SquareColor2;
+int W2SquareColor3;
+int W2SquareColor4;
+int W2SquareColor5;
+int W2SquareColor6;
+int W2SquareColor7;
+int W2SquareColor8;
+int W2SquareColor9;
 
 @interface ViewController : UIViewController{
+    IBOutlet UIView *WorldSelect;
 
+    IBOutlet UIView *World2Game;
 IBOutlet UIImageView *Square1;
     IBOutlet UIImageView *Square2;
     IBOutlet UIImageView *Square3;
@@ -74,6 +91,84 @@ IBOutlet UIImageView *Square1;
     IBOutlet UILabel *BlrW28;
     IBOutlet UILabel *BlrW29;
     IBOutlet UILabel *BlrW30;
+    
+    
+    
+    
+    
+    
+    
+    
+    IBOutlet UIImageView *W2Square1;
+    IBOutlet UIImageView *W2Square2;
+    IBOutlet UIImageView *W2Square3;
+    IBOutlet UIImageView *W2Square4;
+    IBOutlet UIImageView *W2Square5;
+    IBOutlet UIImageView *W2Square6;
+    IBOutlet UIImageView *W2Square7;
+    IBOutlet UIImageView *W2Square8;
+    IBOutlet UIImageView *W2Square9;
+
+    IBOutlet UIButton *W2SquareB1;
+    IBOutlet UIButton *W2SquareB2;
+    IBOutlet UIButton *W2SquareB3;
+    IBOutlet UIButton *W2SquareB4;
+    IBOutlet UIButton *W2SquareB5;
+    IBOutlet UIButton *W2SquareB6;
+    IBOutlet UIButton *W2SquareB7;
+    IBOutlet UIButton *W2SquareB8;
+    IBOutlet UIButton *W2SquareB9;
+    IBOutlet UILabel *Time2;
+    IBOutlet UILabel *SquaresLeft2;
+    IBOutlet UIButton *Start2;
+    IBOutlet UILabel *lvlNum2;
+
+    IBOutlet UILabel *Lose2;
+    IBOutlet UIButton *Exit2;
+    IBOutlet UIImageView *Color2;
+    IBOutlet UILabel *Win2;
+    IBOutlet UIButton *next2;
+    IBOutlet UILabel *lvl2;
+    IBOutlet UIView *World2;
+    IBOutlet UIImageView *W2I1;
+    IBOutlet UIImageView *W2I2;
+    IBOutlet UIImageView *W2I3;
+    IBOutlet UIImageView *W2I4;
+    IBOutlet UIImageView *W2I5;
+    IBOutlet UIImageView *W2I6;
+    IBOutlet UIImageView *W2I7;
+    IBOutlet UIImageView *W2I8;
+    IBOutlet UIImageView *W2I9;
+
+    IBOutlet UILabel *Blr2W2;
+    IBOutlet UILabel *Blr2W3;
+    IBOutlet UILabel *Blr2W4;
+    IBOutlet UILabel *Blr2W5;
+    IBOutlet UILabel *Blr2W6;
+    IBOutlet UILabel *Blr2W7;
+    IBOutlet UILabel *Blr2W8;
+    IBOutlet UILabel *Blr2W9;
+    IBOutlet UILabel *Blr2W10;
+    IBOutlet UILabel *Blr2W11;
+    IBOutlet UILabel *Blr2W12;
+    IBOutlet UILabel *Blr2W13;
+    IBOutlet UILabel *Blr2W14;
+    IBOutlet UILabel *Blr2W15;
+    IBOutlet UILabel *Blr2W16;
+    IBOutlet UILabel *Blr2W17;
+    IBOutlet UILabel *Blr2W18;
+    IBOutlet UILabel *Blr2W19;
+    IBOutlet UILabel *Blr2W20;
+    IBOutlet UILabel *Blr2W21;
+    IBOutlet UILabel *Blr2W22;
+    IBOutlet UILabel *Blr2W23;
+    IBOutlet UILabel *Blr2W24;
+    IBOutlet UILabel *Blr2W25;
+    IBOutlet UILabel *Blr2W26;
+    IBOutlet UILabel *Blr2W27;
+    IBOutlet UILabel *Blr2W28;
+    IBOutlet UILabel *Blr2W29;
+    IBOutlet UILabel *Blr2W30;
 }
 
 
@@ -117,5 +212,64 @@ IBOutlet UIImageView *Square1;
 -(IBAction)WOne29;
 -(IBAction)WOne30;
 -(IBAction)QuitW1;
+
+-(IBAction)World1:(id)sender;
+-(IBAction)World2:(id)sender;
+
+
+
+
+
+
+
+
+-(IBAction)Start2:(id)sender;
+-(IBAction)Time2;
+-(IBAction)Randomiser2;
+-(IBAction)W2Square1:(id)sender;
+-(IBAction)W2Square2:(id)sender;
+-(IBAction)W2Square3:(id)sender;
+-(IBAction)W2Square4:(id)sender;
+-(IBAction)W2Square5:(id)sender;
+-(IBAction)W2Square6:(id)sender;
+-(IBAction)W2Square7:(id)sender;
+-(IBAction)W2Square8:(id)sender;
+-(IBAction)W2Square9:(id)sender;
+-(IBAction)Exit2;
+-(IBAction)Next2;
+-(IBAction)WTwo1;
+-(IBAction)WTwo2;
+-(IBAction)WTwo3;
+-(IBAction)WTwo4;
+-(IBAction)WTwo5;
+-(IBAction)WTwo6;
+-(IBAction)WTwo7;
+-(IBAction)WTwo8;
+-(IBAction)WTwo9;
+-(IBAction)WTwo10;
+-(IBAction)WTwo11;
+-(IBAction)WTwo12;
+-(IBAction)WTwo13;
+-(IBAction)WTwo14;
+-(IBAction)WTwo15;
+-(IBAction)WTwo16;
+-(IBAction)WTwo17;
+-(IBAction)WTwo18;
+-(IBAction)WTwo19;
+-(IBAction)WTwo20;
+-(IBAction)WTwo21;
+-(IBAction)WTwo22;
+-(IBAction)WTwo23;
+-(IBAction)WTwo24;
+-(IBAction)WTwo25;
+-(IBAction)WTwo26;
+-(IBAction)WTwo27;
+-(IBAction)WTwo28;
+-(IBAction)WTwo29;
+-(IBAction)WTwo30;
+-(IBAction)QuitW2;
+
+-(IBAction)WTwoExit;
+-(IBAction)WOneExit;
 @end
 
