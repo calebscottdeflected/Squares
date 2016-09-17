@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+int question;
 int TimeI;
 int ColorPicker;
 int SquareColor1;
@@ -23,7 +24,7 @@ NSInteger level2;
 int Left2;
 int TimeI2;
 int ColorSquare2;
-
+int sel;
 int W2SquareColor1;
 int W2SquareColor2;
 int W2SquareColor3;
@@ -34,7 +35,32 @@ int W2SquareColor7;
 int W2SquareColor8;
 int W2SquareColor9;
 
+NSInteger world3andlvl;
+NSInteger level3;
+int Left3;
+int TimeI3;
+int ColorSquare3;
+
+int W3SquareColor1;
+int W3SquareColor2;
+int W3SquareColor3;
+int W3SquareColor4;
+int W3SquareColor5;
+int W3SquareColor6;
+int W3SquareColor7;
+int W3SquareColor8;
+int W3SquareColor9;
+
 @interface ViewController : UIViewController{
+    IBOutlet UIButton *left;
+    IBOutlet UIButton *right;
+    IBOutlet UIButton *select1;
+    IBOutlet UIButton *select2;
+    IBOutlet UIButton *select3;
+    IBOutlet UILabel *leftlabel;
+    IBOutlet UILabel *rightlabel;
+    IBOutlet UILabel *Worldst;
+
     IBOutlet UIView *WorldSelect;
 
     IBOutlet UIView *World2Game;
@@ -169,6 +195,84 @@ IBOutlet UIImageView *Square1;
     IBOutlet UILabel *Blr2W28;
     IBOutlet UILabel *Blr2W29;
     IBOutlet UILabel *Blr2W30;
+    
+    
+    
+    
+    
+    
+    IBOutlet UIView *World3Game;
+
+    IBOutlet UIImageView *W3Square1;
+    IBOutlet UIImageView *W3Square2;
+    IBOutlet UIImageView *W3Square3;
+    IBOutlet UIImageView *W3Square4;
+    IBOutlet UIImageView *W3Square5;
+    IBOutlet UIImageView *W3Square6;
+    IBOutlet UIImageView *W3Square7;
+    IBOutlet UIImageView *W3Square8;
+    IBOutlet UIImageView *W3Square9;
+    
+    IBOutlet UIButton *W3SquareB1;
+    IBOutlet UIButton *W3SquareB2;
+    IBOutlet UIButton *W3SquareB3;
+    IBOutlet UIButton *W3SquareB4;
+    IBOutlet UIButton *W3SquareB5;
+    IBOutlet UIButton *W3SquareB6;
+    IBOutlet UIButton *W3SquareB7;
+    IBOutlet UIButton *W3SquareB8;
+    IBOutlet UIButton *W3SquareB9;
+    IBOutlet UILabel *Time3;
+    IBOutlet UILabel *SquaresLeft3;
+    IBOutlet UIButton *Start3;
+    IBOutlet UILabel *lvlNum3;
+    
+    IBOutlet UILabel *Lose3;
+    IBOutlet UIButton *Exit3;
+    IBOutlet UIImageView *Color3;
+    IBOutlet UILabel *Win3;
+    IBOutlet UIButton *next3;
+    IBOutlet UILabel *lvl3;
+    IBOutlet UIView *World3;
+    IBOutlet UIImageView *W3I1;
+    IBOutlet UIImageView *W3I2;
+    IBOutlet UIImageView *W3I3;
+    IBOutlet UIImageView *W3I4;
+    IBOutlet UIImageView *W3I5;
+    IBOutlet UIImageView *W3I6;
+    IBOutlet UIImageView *W3I7;
+    IBOutlet UIImageView *W3I8;
+    IBOutlet UIImageView *W3I9;
+    
+    IBOutlet UILabel *Blr3W2;
+    IBOutlet UILabel *Blr3W3;
+    IBOutlet UILabel *Blr3W4;
+    IBOutlet UILabel *Blr3W5;
+    IBOutlet UILabel *Blr3W6;
+    IBOutlet UILabel *Blr3W7;
+    IBOutlet UILabel *Blr3W8;
+    IBOutlet UILabel *Blr3W9;
+    IBOutlet UILabel *Blr3W10;
+    IBOutlet UILabel *Blr3W11;
+    IBOutlet UILabel *Blr3W12;
+    IBOutlet UILabel *Blr3W13;
+    IBOutlet UILabel *Blr3W14;
+    IBOutlet UILabel *Blr3W15;
+    IBOutlet UILabel *Blr3W16;
+    IBOutlet UILabel *Blr3W17;
+    IBOutlet UILabel *Blr3W18;
+    IBOutlet UILabel *Blr3W19;
+    IBOutlet UILabel *Blr3W20;
+    IBOutlet UILabel *Blr3W21;
+    IBOutlet UILabel *Blr3W22;
+    IBOutlet UILabel *Blr3W23;
+    IBOutlet UILabel *Blr3W24;
+    IBOutlet UILabel *Blr3W25;
+    IBOutlet UILabel *Blr3W26;
+    IBOutlet UILabel *Blr3W27;
+    IBOutlet UILabel *Blr3W28;
+    IBOutlet UILabel *Blr3W29;
+    IBOutlet UILabel *Blr3W30;
 }
 
 
@@ -215,10 +319,12 @@ IBOutlet UIImageView *Square1;
 
 -(IBAction)World1:(id)sender;
 -(IBAction)World2:(id)sender;
+-(IBAction)World3:(id)sender;
 
 
 
-
+-(IBAction)left:(id)sender;
+-(IBAction)right:(id)sender;
 
 
 
@@ -269,6 +375,72 @@ IBOutlet UIImageView *Square1;
 -(IBAction)WTwo30;
 -(IBAction)QuitW2;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-(IBAction)Start3:(id)sender;
+-(IBAction)Time3;
+-(IBAction)Randomiser3;
+-(IBAction)W3Square1:(id)sender;
+-(IBAction)W3Square2:(id)sender;
+-(IBAction)W3Square3:(id)sender;
+-(IBAction)W3Square4:(id)sender;
+-(IBAction)W3Square5:(id)sender;
+-(IBAction)W3Square6:(id)sender;
+-(IBAction)W3Square7:(id)sender;
+-(IBAction)W3Square8:(id)sender;
+-(IBAction)W3Square9:(id)sender;
+-(IBAction)Exit3;
+-(IBAction)Next3;
+-(IBAction)WThree1;
+-(IBAction)WThree2;
+-(IBAction)WThree3;
+-(IBAction)WThree4;
+-(IBAction)WThree5;
+-(IBAction)WThree6;
+-(IBAction)WThree7;
+-(IBAction)WThree8;
+-(IBAction)WThree9;
+-(IBAction)WThree10;
+-(IBAction)WThree11;
+-(IBAction)WThree12;
+-(IBAction)WThree13;
+-(IBAction)WThree14;
+-(IBAction)WThree15;
+-(IBAction)WThree16;
+-(IBAction)WThree17;
+-(IBAction)WThree18;
+-(IBAction)WThree19;
+-(IBAction)WThree20;
+-(IBAction)WThree21;
+-(IBAction)WThree22;
+-(IBAction)WThree23;
+-(IBAction)WThree24;
+-(IBAction)WThree25;
+-(IBAction)WThree26;
+-(IBAction)WThree27;
+-(IBAction)WThree28;
+-(IBAction)WThree29;
+-(IBAction)WThree30;
+-(IBAction)QuitW3;
+
+
+-(IBAction)WThreeExit;
 -(IBAction)WTwoExit;
 -(IBAction)WOneExit;
 @end
