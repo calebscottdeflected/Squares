@@ -34,9 +34,6 @@ int W2SquareColor6;
 int W2SquareColor7;
 int W2SquareColor8;
 int W2SquareColor9;
-int ColorSquare;
-int ColorSquarePicker;
-int Left;
 
 NSInteger world3andlvl;
 NSInteger level3;
@@ -60,12 +57,13 @@ int W3SquareColor9;
     IBOutlet UIButton *select1;
     IBOutlet UIButton *select2;
     IBOutlet UIButton *select3;
+    IBOutlet UILabel *PlayW;
     IBOutlet UILabel *leftlabel;
     IBOutlet UILabel *rightlabel;
     IBOutlet UILabel *Worldst;
-
+    IBOutlet UIImageView *sel2;
     IBOutlet UIView *WorldSelect;
-
+    IBOutlet UILabel *ComingSoon;
     IBOutlet UIView *World2Game;
 IBOutlet UIImageView *Square1;
     IBOutlet UIImageView *Square2;

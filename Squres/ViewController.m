@@ -7,62 +7,58 @@
 //
 
 #import "ViewController.h"
+@import GoogleMobileAds;
+static NSString *const kInterstitialAdUnitID = @"ca-app-pub-3383258975090991/5955386062";
 
-@interface ViewController ()
+@interface ViewController ()<GADInterstitialDelegate>
+@property(nonatomic, strong) GADInterstitial *interstitial;
+@property (weak, nonatomic) IBOutlet UIButton *interstitialButton;
 
 @end
 
 @implementation ViewController
+
 -(IBAction)left:(id)sender{
-    if (sel <= 2) {
+    if (sel >= 0) {
         sel = sel - 1;
-        if (sel == 0) {
-            Worldst.text = @"World 1";
-            
+        if (sel == 2) {
+            [sel2 stopAnimating];
             left.hidden = YES;
-            leftlabel.hidden = YES;
-            select1.hidden = NO;
+            right.hidden = NO;
+            select1.hidden = YES;
             select2.hidden = YES;
             select3.hidden = YES;
-            if (worldandlvl == 29) {
-                right.hidden = NO;
-                rightlabel.hidden = NO;
+            ComingSoon.hidden = NO;
+            UIImage *img = [UIImage imageNamed:@"world3sel.jpg"];
+            PlayW.hidden = YES;
 
-            } else {
-                right.hidden = YES;
-                rightlabel.hidden = YES;
-
-
-            }
-            
-        } else {
+            [sel2 setImage:img];
+        }else{
             if (sel == 1) {
-                Worldst.text = @"World 2";
+                [sel2 stopAnimating];
                 left.hidden = NO;
-                leftlabel.hidden = NO;
-                rightlabel.hidden = NO;
                 right.hidden = NO;
                 select1.hidden = YES;
                 select2.hidden = NO;
                 select3.hidden = YES;
-                if (world2andlvl == 29) {
-                    right.hidden = NO;
-                    rightlabel.hidden = NO;
-                } else {
-                    right.hidden = YES;
-                    rightlabel.hidden = YES;
+                ComingSoon.hidden = YES;
+                PlayW.hidden = NO;
 
-                }
+                UIImage *img = [UIImage imageNamed:@"world2sel.jpg"];
                 
+                [sel2 setImage:img];
             } else {
-                Worldst.text = @"World 3";
-                left.hidden = NO;
-                leftlabel.hidden = NO;
-                select1.hidden = YES;
+
+                [sel2 stopAnimating];
+                left.hidden = YES;
+                right.hidden = NO;
+                select1.hidden = NO;
                 select2.hidden = YES;
-                select3.hidden = NO;
-                right.hidden = YES;
-                rightlabel.hidden = YES;
+                select3.hidden = YES;
+                UIImage *img = [UIImage imageNamed:@"world1sel.jpg"];
+                sel = 0;
+
+                [sel2 setImage:img];
             }
         }
     }
@@ -71,51 +67,40 @@
     if (sel <= 2) {
         sel = sel + 1;
         if (sel == 0) {
-            Worldst.text = @"World 1";
+            [sel2 stopAnimating];
             left.hidden = YES;
-            leftlabel.hidden = YES;
+            UIImage *img = [UIImage imageNamed:@"world1sel.jpg"];
             select1.hidden = NO;
             select2.hidden = YES;
             select3.hidden = YES;
-            if (worldandlvl == 29) {
-                right.hidden = NO;
-                rightlabel.hidden = NO;
-                
-            } else {
-                right.hidden = YES;
-                rightlabel.hidden = YES;
-                
-                
-            }
-        } else {
+            
+            [sel2 setImage:img];
+            
+        }else{
             if (sel == 1) {
-                Worldst.text = @"World 2";
+                [sel2 stopAnimating];
                 left.hidden = NO;
-                leftlabel.hidden = NO;
-                rightlabel.hidden = NO;
                 right.hidden = NO;
                 select1.hidden = YES;
                 select2.hidden = NO;
                 select3.hidden = YES;
-                if (world2andlvl == 29) {
-                    right.hidden = NO;
-                    rightlabel.hidden = NO;
-                    
-                } else {
-                    right.hidden = YES;
-                    rightlabel.hidden = YES;
-                    
-                    
-                }
+                UIImage *img = [UIImage imageNamed:@"world2sel.jpg"];
+                ComingSoon.hidden = YES;
+                PlayW.hidden = NO;
+
+                [sel2 setImage:img];
             } else {
-                Worldst.text = @"World 3";
+                [sel2 stopAnimating];
                 left.hidden = NO;
-                leftlabel.hidden = NO;
+                right.hidden = YES;
+                ComingSoon.hidden = NO;
+                PlayW.hidden = YES;
                 select1.hidden = YES;
                 select2.hidden = YES;
-                select3.hidden = NO;
-                right.hidden = YES;
-                rightlabel.hidden = YES;
+                select3.hidden = YES;
+                UIImage *img = [UIImage imageNamed:@"world3sel.jpg"];
+                sel = 2;
+                [sel2 setImage:img];
             }
         }
     }
@@ -159,31 +144,36 @@
     Start3.hidden = YES;
     ColorSquare3 = arc4random();
     
-    if (ColorPicker == 1) {
-        [Color3 stopAnimating];
-        
-        UIImage *img = [UIImage imageNamed:@"green.jpg"];
-        [Color3 setImage:img];
-    } else {
-        if (ColorPicker == 2) {
+    
+ 
+        ColorPicker = rand()% 4+1;
+        Color3.hidden = NO;
+        if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"red.jpg"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
-            if (ColorPicker == 3) {
+            if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"yellow.jpg"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
-                [Color3 stopAnimating];
-                
-                UIImage *img = [UIImage imageNamed:@"blue.jpg"];
-                [Color3 setImage:img];
+                if (ColorPicker == 3) {
+                    [Color3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
+                    [Color3 setImage:img];
+                } else {
+                    [Color3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
+                    [Color3 setImage:img];
+                }
             }
         }
-    }
+    
     Color3.hidden = YES;
     [self Randomiser3];
     TimeLeft = [NSTimer scheduledTimerWithTimeInterval:1.00 target:self selector:@selector(Time2) userInfo:Nil repeats:YES];
@@ -6212,24 +6202,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -6420,24 +6410,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -6624,24 +6614,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -6828,24 +6818,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -7033,24 +7023,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -7238,24 +7228,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -7442,24 +7432,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -7646,24 +7636,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -7850,24 +7840,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -8054,24 +8044,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -8258,24 +8248,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -8462,24 +8452,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -8666,24 +8656,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -8870,24 +8860,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -9074,24 +9064,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -9278,24 +9268,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -9482,24 +9472,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -9686,24 +9676,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -9890,24 +9880,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -10094,24 +10084,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -10298,24 +10288,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -10502,24 +10492,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -10706,24 +10696,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -10910,24 +10900,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -11114,24 +11104,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -11318,24 +11308,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -11522,24 +11512,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -11726,24 +11716,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -11930,24 +11920,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -12134,24 +12124,24 @@
         if (ColorPicker == 1) {
             [Color3 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color3 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color3 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color3 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color3 setImage:img];
                 } else {
                     [Color3 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color3 setImage:img];
                 }
             }
@@ -12528,8 +12518,8 @@
 
 
 -(IBAction)WTwoExit{
-    World2Game.hidden = NO;
-    World2.hidden = NO;
+    World3Game.hidden = NO;
+    World3.hidden = NO;
     WorldSelect.hidden = NO;
 
 }
@@ -12542,9 +12532,12 @@
 }
 -(IBAction)World1:(id)sender{
     WorldSelect.hidden = YES;
-    World2.hidden = YES;
     World2Game.hidden = YES;
+    World2.hidden = YES;
     World1.hidden = NO;
+    if ([self.interstitial isReady]) {
+        [self.interstitial presentFromRootViewController:self];
+    }
 }
 -(IBAction)World2:(id)sender{
     World2.hidden = NO;
@@ -12552,6 +12545,9 @@
     WorldSelect.hidden = YES;
     World3.hidden = YES;
     World3Game.hidden = YES;
+    if ([self.interstitial isReady]) {
+        [self.interstitial presentFromRootViewController:self];
+    }
 }
 
 
@@ -12562,6 +12558,12 @@
     W2SquareB2.hidden = NO;
     W2SquareB3.hidden = NO;
     W2SquareB4.hidden = NO;
+    W2SquareB5.hidden = NO;
+    W2SquareB6.hidden = NO;
+    W2SquareB7.hidden = NO;
+    W2SquareB8.hidden = NO;
+    W2SquareB9.hidden = NO;
+
     W2SquareColor1 = rand()% 4+1;
     W2SquareColor2 = rand()% 4+1;
     W2SquareColor3 = rand()% 4+1;
@@ -12580,24 +12582,24 @@
     if (ColorPicker == 1) {
         [Color2 stopAnimating];
         
-        UIImage *img = [UIImage imageNamed:@"green.jpg"];
+        UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
         [Color2 setImage:img];
     } else {
         if (ColorPicker == 2) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"red.jpg"];
+            UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 3) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"yellow.jpg"];
+                UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                 [Color2 setImage:img];
             } else {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"blue.jpg"];
+                UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                 [Color2 setImage:img];
             }
         }
@@ -12605,6 +12607,8 @@
     Color2.hidden = YES;
     [self Randomiser2];
     TimeLeft = [NSTimer scheduledTimerWithTimeInterval:1.00 target:self selector:@selector(Time2) userInfo:Nil repeats:YES];
+    
+    
     if (level2 == 0) {
         TimeI2 = 40;
         Left2 = 20;
@@ -12642,7 +12646,7 @@
                             } else {
                                 if (level2 == 7) {
                                     TimeI2 = 15;
-                                    Left2 = 22;
+                                    Left2 = 28;
                                     lvlNum2.text = @"8";
                                 } else {
                                     if (level2 == 8) {
@@ -12651,14 +12655,14 @@
                                         lvlNum2.text = @"9";
                                     } else {
                                         if (level2 == 9) {
-                                            TimeI2 = 10;
+                                            TimeI2 = 9;
                                             Left2 = 18;
                                             lvlNum2.text = @"10";
                                         } else {
                                             if (level2 == 10) {
-                                                TimeI2 = 11;
+                                                TimeI2 = 10;
                                                 Left2 = 19;
-                                                lvlNum2.text = @"11";
+                                                lvlNum.text = @"11";
                                             } else {
                                                 if (level2 == 11) {
                                                     TimeI2 = 10;
@@ -12677,7 +12681,7 @@
                                                         } else {
                                                             if (level2 == 14) {
                                                                 TimeI2 = 8;
-                                                                Left2 = 15;
+                                                                Left2 = 18;
                                                                 lvlNum2.text = @"15";
                                                             } else {
                                                                 if (level2 == 15) {
@@ -12687,22 +12691,22 @@
                                                                 } else {
                                                                     if (level2 == 16) {
                                                                         TimeI2 = 10;
-                                                                        Left2 = 17;
+                                                                        Left2 = 22;
                                                                         lvlNum2.text = @"17";
                                                                     } else {
                                                                         if (level2 == 17) {
                                                                             TimeI2 = 15;
-                                                                            Left2 = 35;
+                                                                            Left2 = 30;
                                                                             lvlNum2.text = @"18";
                                                                         } else {
                                                                             if (level2 == 18) {
                                                                                 TimeI2 = 15;
-                                                                                Left2 = 36;
+                                                                                Left2 = 31;
                                                                                 lvlNum2.text = @"19";
                                                                             } else {
                                                                                 if (level2 == 19) {
                                                                                     TimeI2 = 15;
-                                                                                    Left2 = 37;
+                                                                                    Left2 = 32;
                                                                                     lvlNum2.text = @"20";
                                                                                 } else {
                                                                                     if (level2 == 20) {
@@ -12712,22 +12716,22 @@
                                                                                     } else {
                                                                                         if (level2 == 21) {
                                                                                             TimeI2 = 10;
-                                                                                            Left2 = 20;
+                                                                                            Left2 = 22;
                                                                                             lvlNum2.text = @"22";
                                                                                         } else {
                                                                                             if (level2 == 22) {
                                                                                                 TimeI2 = 21;
-                                                                                                Left2 = 42;
+                                                                                                Left2 = 44;
                                                                                                 lvlNum2.text = @"23";
                                                                                             } else {
                                                                                                 if (level2 == 23) {
                                                                                                     TimeI2 = 21;
-                                                                                                    Left2 = 44;
+                                                                                                    Left2 = 45;
                                                                                                     lvlNum2.text = @"24";
                                                                                                 } else {
                                                                                                     if (level2 == 24) {
-                                                                                                        TimeI2 = 22;
-                                                                                                        Left2 = 45;
+                                                                                                        TimeI2 = 23;
+                                                                                                        Left2 = 47;
                                                                                                         lvlNum2.text = @"25";
                                                                                                     } else {
                                                                                                         if (level2 == 25) {
@@ -12741,13 +12745,13 @@
                                                                                                                 lvlNum2.text = @"27";
                                                                                                             } else {
                                                                                                                 if (level2 == 27) {
-                                                                                                                    TimeI2 = 12;
-                                                                                                                    Left2 = 25;
+                                                                                                                    TimeI2 = 11;
+                                                                                                                    Left2 = 24;
                                                                                                                     lvlNum2.text = @"28";
                                                                                                                 } else {
                                                                                                                     if (level2 == 28) {
                                                                                                                         TimeI2 = 14;
-                                                                                                                        Left2 = 30;
+                                                                                                                        Left2 = 31;
                                                                                                                         lvlNum2.text = @"29";
                                                                                                                     } else {
                                                                                                                         if (level2 == 29) {
@@ -12781,6 +12785,16 @@
         [TimeLeft invalidate];
         Lose2.hidden = NO;
         Exit2.hidden = NO;
+        W2SquareB9.hidden = YES;
+        W2SquareB8.hidden = YES;
+        W2SquareB7.hidden = YES;
+        W2SquareB6.hidden = YES;
+        W2SquareB5.hidden = YES;
+        W2SquareB4.hidden = YES;
+        W2SquareB3.hidden = YES;
+        W2SquareB2.hidden = YES;
+        W2SquareB1.hidden = YES;
+
     }
 }
 -(IBAction)Randomiser2{
@@ -13363,9 +13377,63 @@
     
 }
 -(IBAction)W2Square1:(id)sender{
+    if (ColorSquare2 == 1) {
+        if (ColorPicker == 1) {
+            [W2Square1 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square1 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square1 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square1 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square1 setImage:img];
+                } else {
+                    [W2Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square1 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor1 == 1) {
+            [W2Square1 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square1 setImage:img];
+        } else {
+            if (W2SquareColor1 == 2) {
+                [W2Square1 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square1 setImage:img];
+            } else {
+                if (W2SquareColor1 == 3) {
+                    [W2Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square1 setImage:img];
+                } else {
+                    [W2Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square1 setImage:img];
+                }
+            }
+        }
+    }
+
     if (ColorSquare2 == 1){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -13966,9 +14034,65 @@
     }
 }
 -(IBAction)W2Square2:(id)sender{
+    if (ColorSquare2 == 2) {
+        if (ColorPicker == 1) {
+            [W2Square2 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square2 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square2 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square2 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square2 setImage:img];
+                } else {
+                    [W2Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square2 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor2 == 1) {
+            [W2Square2 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square2 setImage:img];
+        } else {
+            if (W2SquareColor2 == 2) {
+                [W2Square2 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square2 setImage:img];
+            } else {
+                if (W2SquareColor2 == 3) {
+                    [W2Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square2 setImage:img];
+                } else {
+                    [W2Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square2 setImage:img];
+                }
+            }
+        }
+    }
+    
+    
+
     if (ColorSquare2 == 2){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -14571,9 +14695,62 @@
     }
 }
 -(IBAction)W2Square3:(id)sender{
+    if (ColorSquare2 == 3) {
+        if (ColorPicker == 1) {
+            [W2Square3 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square3 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square3 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square3 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square3 setImage:img];
+                } else {
+                    [W2Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square3 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor3 == 1) {
+            [W2Square3 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square3 setImage:img];
+        } else {
+            if (W2SquareColor3 == 2) {
+                [W2Square3 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square3 setImage:img];
+            } else {
+                if (W2SquareColor3 == 3) {
+                    [W2Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square3 setImage:img];
+                } else {
+                    [W2Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square3 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 3){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -15177,9 +15354,62 @@
     }
 }
 -(IBAction)W2Square4:(id)sender{
+    if (ColorSquare2 == 4) {
+        if (ColorPicker == 1) {
+            [W2Square4 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square4 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square4 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square4 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square4 setImage:img];
+                } else {
+                    [W2Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square4 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor4 == 1) {
+            [W2Square4 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square4 setImage:img];
+        } else {
+            if (W2SquareColor4 == 2) {
+                [W2Square4 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square4 setImage:img];
+            } else {
+                if (W2SquareColor4 == 3) {
+                    [W2Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square4 setImage:img];
+                } else {
+                    [W2Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square4 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 4){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -15783,9 +16013,62 @@
     }
 }
 -(IBAction)W2Square5:(id)sender{
+    if (ColorSquare2 == 5) {
+        if (ColorPicker == 1) {
+            [W2Square5 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square5 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square5 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square5 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square5 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square5 setImage:img];
+                } else {
+                    [W2Square5 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square5 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor5 == 1) {
+            [W2Square5 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square5 setImage:img];
+        } else {
+            if (W2SquareColor5 == 2) {
+                [W2Square5 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square5 setImage:img];
+            } else {
+                if (W2SquareColor5 == 3) {
+                    [W2Square5 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square5 setImage:img];
+                } else {
+                    [W2Square5 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square5 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 5){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -16388,9 +16671,62 @@
     }
 }
 -(IBAction)W2Square6:(id)sender{
+    if (ColorSquare2 == 6) {
+        if (ColorPicker == 1) {
+            [W2Square6 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square6 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square6 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square6 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square6 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square6 setImage:img];
+                } else {
+                    [W2Square6 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square6 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor6 == 1) {
+            [W2Square6 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square6 setImage:img];
+        } else {
+            if (W2SquareColor6 == 2) {
+                [W2Square6 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square6 setImage:img];
+            } else {
+                if (W2SquareColor6 == 3) {
+                    [W2Square6 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square6 setImage:img];
+                } else {
+                    [W2Square6 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square6 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 6){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -16993,9 +17329,62 @@
     }
 }
 -(IBAction)W2Square7:(id)sender{
+    if (ColorSquare2 == 7) {
+        if (ColorPicker == 1) {
+            [W2Square7 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square7 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square7 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square7 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square7 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square7 setImage:img];
+                } else {
+                    [W2Square7 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square7 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor7 == 1) {
+            [W2Square7 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square7 setImage:img];
+        } else {
+            if (W2SquareColor7 == 2) {
+                [W2Square7 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square7 setImage:img];
+            } else {
+                if (W2SquareColor7 == 3) {
+                    [W2Square7 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square7 setImage:img];
+                } else {
+                    [W2Square7 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square7 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 7){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -17598,9 +17987,62 @@
     }
 }
 -(IBAction)W2Square8:(id)sender{
+    if (ColorSquare2 == 8) {
+        if (ColorPicker == 1) {
+            [W2Square8 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square8 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square8 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square8 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square8 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square8 setImage:img];
+                } else {
+                    [W2Square8 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square8 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor8 == 1) {
+            [W2Square8 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square8 setImage:img];
+        } else {
+            if (W2SquareColor8 == 2) {
+                [W2Square8 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square8 setImage:img];
+            } else {
+                if (W2SquareColor8 == 3) {
+                    [W2Square8 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square8 setImage:img];
+                } else {
+                    [W2Square8 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square8 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 8){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -18203,9 +18645,62 @@
     }
 }
 -(IBAction)W2Square9:(id)sender{
+    if (ColorSquare2 == 9) {
+        if (ColorPicker == 1) {
+            [W2Square9 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square9 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [W2Square9 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square9 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [W2Square9 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square9 setImage:img];
+                } else {
+                    [W2Square9 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square9 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (W2SquareColor9 == 1) {
+            [W2Square9 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [W2Square9 setImage:img];
+        } else {
+            if (W2SquareColor9 == 2) {
+                [W2Square9 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [W2Square9 setImage:img];
+            } else {
+                if (W2SquareColor9 == 3) {
+                    [W2Square9 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [W2Square9 setImage:img];
+                } else {
+                    [W2Square9 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [W2Square9 setImage:img];
+                }
+            }
+        }
+    }
     if (ColorSquare2 == 9){
         ColorSquare2 = rand()% 4+1;
-        [self Randomiser2];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser2) userInfo:nil repeats:NO];
         Left2 = Left2 - 1;
         SquaresLeft2.text = [NSString stringWithFormat:@"%i", Left2];
         
@@ -19171,24 +19666,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -19380,24 +19875,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -19589,24 +20084,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -19798,24 +20293,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -20007,24 +20502,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -20216,24 +20711,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -20425,24 +20920,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -20634,24 +21129,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -20843,24 +21338,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -21052,24 +21547,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -21261,24 +21756,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -21470,24 +21965,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -21679,24 +22174,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -21888,24 +22383,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -22097,24 +22592,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -22306,24 +22801,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -22515,24 +23010,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -22724,24 +23219,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -22933,24 +23428,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -23142,24 +23637,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -23351,24 +23846,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -23560,24 +24055,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -23769,24 +24264,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -23978,24 +24473,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -24187,24 +24682,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -24396,24 +24891,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -24605,24 +25100,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -24814,24 +25309,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -25023,24 +25518,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -25232,24 +25727,24 @@
         if (ColorPicker == 1) {
             [Color2 stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color2 setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color2 stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color2 setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color2 setImage:img];
                 } else {
                     [Color2 stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color2 setImage:img];
                 }
             }
@@ -25837,31 +26332,32 @@
 -(IBAction)WOne1{
     ColorPicker = rand()% 4+1;
     Color.hidden = NO;
-    if (ColorPicker == 1) {
-        [Color stopAnimating];
-        
-        UIImage *img = [UIImage imageNamed:@"Green.png"];
-        [Color setImage:img];
-    } else {
-        if (ColorPicker == 2) {
+        if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Red.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
-            if (ColorPicker == 3) {
+            if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
-                [Color stopAnimating];
-                
-                UIImage *img = [UIImage imageNamed:@"Purple.png"];
-                [Color setImage:img];
+                if (ColorPicker == 3) {
+                    [Color stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
+                    [Color setImage:img];
+                } else {
+                    [Color stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
+                    [Color setImage:img];
+                }
             }
         }
-    }
+        World2Game.hidden = YES;
     World1.hidden = YES;
     lvl.hidden = NO;
     lvlNum.hidden = NO;
@@ -26048,24 +26544,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -26257,24 +26753,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -26466,24 +26962,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -26675,24 +27171,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -26884,24 +27380,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -27093,24 +27589,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -27302,24 +27798,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -27511,24 +28007,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -27720,24 +28216,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -27929,24 +28425,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -28138,24 +28634,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -28347,24 +28843,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -28556,24 +29052,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -28765,24 +29261,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -28974,24 +29470,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -29183,24 +29679,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -29392,24 +29888,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -29601,24 +30097,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -29810,24 +30306,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -30019,24 +30515,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -30228,24 +30724,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -30437,24 +30933,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -30646,24 +31142,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -30855,24 +31351,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -31064,24 +31560,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -31273,24 +31769,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -31482,24 +31978,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -31691,24 +32187,24 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
@@ -31900,28 +32396,30 @@
         if (ColorPicker == 1) {
             [Color stopAnimating];
             
-            UIImage *img = [UIImage imageNamed:@"Green.png"];
+            UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
             [Color setImage:img];
         } else {
             if (ColorPicker == 2) {
                 [Color stopAnimating];
                 
-                UIImage *img = [UIImage imageNamed:@"Red.png"];
+                UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
                 [Color setImage:img];
             } else {
                 if (ColorPicker == 3) {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Yellow.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
                     [Color setImage:img];
                 } else {
                     [Color stopAnimating];
                     
-                    UIImage *img = [UIImage imageNamed:@"Purple.png"];
+                    UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
                     [Color setImage:img];
                 }
             }
         }
+        World2Game.hidden = YES;
+
         World1.hidden = YES;
         lvl.hidden = NO;
         lvlNum.hidden = NO;
@@ -31931,6 +32429,7 @@
         Start.hidden = NO;
         level = 29;
         next.hidden = YES;
+        World2Game.hidden = YES;
         if (level == 0) {
             TimeI = 40;
             Left = 20;
@@ -32104,7 +32603,33 @@
 }
 -(IBAction)Next{
     [[NSUserDefaults standardUserDefaults] setInteger:worldandlvl forKey:@"level"];
-
+    ColorPicker = rand()% 4+1;
+    Color.hidden = NO;
+    if (ColorPicker == 1) {
+        [Color stopAnimating];
+        
+        UIImage *img = [UIImage imageNamed:@"pressgreen.jpg"];
+        [Color setImage:img];
+    } else {
+        if (ColorPicker == 2) {
+            [Color stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"pressred.jpg"];
+            [Color setImage:img];
+        } else {
+            if (ColorPicker == 3) {
+                [Color stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"pressyellow.jpg"];
+                [Color setImage:img];
+            } else {
+                [Color stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"pressblue.jpg"];
+                [Color setImage:img];
+            }
+        }
+    }
     lvl.hidden = NO;
     lvlNum.hidden = NO;
     Win.hidden = YES;
@@ -32150,7 +32675,7 @@
                             } else {
                                 if (level == 7) {
                                     TimeI = 15;
-                                    Left = 22;
+                                    Left = 28;
                                     lvlNum.text = @"8";
                                 } else {
                                     if (level == 8) {
@@ -32185,7 +32710,7 @@
                                                         } else {
                                                             if (level == 14) {
                                                                 TimeI = 8;
-                                                                Left = 15;
+                                                                Left = 18;
                                                                 lvlNum.text = @"15";
                                                             } else {
                                                                 if (level == 15) {
@@ -32195,22 +32720,22 @@
                                                                 } else {
                                                                     if (level == 16) {
                                                                         TimeI = 10;
-                                                                        Left = 17;
+                                                                        Left = 22;
                                                                         lvlNum.text = @"17";
                                                                     } else {
                                                                         if (level == 17) {
                                                                             TimeI = 15;
-                                                                            Left = 35;
+                                                                            Left = 30;
                                                                             lvlNum.text = @"18";
                                                                         } else {
                                                                             if (level == 18) {
                                                                                 TimeI = 15;
-                                                                                Left = 36;
+                                                                                Left = 31;
                                                                                 lvlNum.text = @"19";
                                                                             } else {
                                                                                 if (level == 19) {
                                                                                     TimeI = 15;
-                                                                                    Left = 37;
+                                                                                    Left = 32;
                                                                                     lvlNum.text = @"20";
                                                                                 } else {
                                                                                     if (level == 20) {
@@ -32220,22 +32745,22 @@
                                                                                     } else {
                                                                                         if (level == 21) {
                                                                                             TimeI = 10;
-                                                                                            Left = 20;
+                                                                                            Left = 22;
                                                                                             lvlNum.text = @"22";
                                                                                         } else {
                                                                                             if (level == 22) {
                                                                                                 TimeI = 21;
-                                                                                                Left = 42;
+                                                                                                Left = 44;
                                                                                                 lvlNum.text = @"23";
                                                                                             } else {
                                                                                                 if (level == 23) {
                                                                                                     TimeI = 21;
-                                                                                                    Left = 44;
+                                                                                                    Left = 45;
                                                                                                     lvlNum.text = @"24";
                                                                                                 } else {
                                                                                                     if (level == 24) {
-                                                                                                        TimeI = 22;
-                                                                                                        Left = 45;
+                                                                                                        TimeI = 23;
+                                                                                                        Left = 47;
                                                                                                         lvlNum.text = @"25";
                                                                                                     } else {
                                                                                                         if (level == 25) {
@@ -32249,13 +32774,13 @@
                                                                                                                 lvlNum.text = @"27";
                                                                                                             } else {
                                                                                                                 if (level == 27) {
-                                                                                                                    TimeI = 12;
-                                                                                                                    Left = 25;
+                                                                                                                    TimeI = 11;
+                                                                                                                    Left = 24;
                                                                                                                     lvlNum.text = @"28";
                                                                                                                 } else {
                                                                                                                     if (level == 28) {
                                                                                                                         TimeI = 14;
-                                                                                                                        Left = 30;
+                                                                                                                        Left = 31;
                                                                                                                         lvlNum.text = @"29";
                                                                                                                     } else {
                                                                                                                         if (level == 29) {
@@ -32458,9 +32983,64 @@
                                                 }}}}}}}}}}}}
 }
 -(IBAction)Square1:(id)sender;{
+    if (ColorSquare == 1) {
+        if (ColorPicker == 1) {
+            [Square1 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square1 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [Square1 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square1 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square1 setImage:img];
+                } else {
+                    [Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square1 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (SquareColor1 == 1) {
+            [Square1 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square1 setImage:img];
+        } else {
+            if (SquareColor1 == 2) {
+                [Square1 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square1 setImage:img];
+            } else {
+                if (SquareColor1 == 3) {
+                    [Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square1 setImage:img];
+                } else {
+                    [Square1 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square1 setImage:img];
+                }
+            }
+        }
+    }
+    
+    
     if (ColorSquare == 1){
             ColorSquare = rand()% 4+1;
-        [self Randomiser];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser) userInfo:nil repeats:NO];
         Left = Left - 1;
         SquaresLeft.text = [NSString stringWithFormat:@"%i", Left];
         
@@ -33053,9 +33633,63 @@
     }
 }
 -(IBAction)Square2:(id)sender{
+    if (ColorSquare == 2) {
+        if (ColorPicker == 1) {
+            [Square2 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square2 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [Square2 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square2 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square2 setImage:img];
+                } else {
+                    [Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square2 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (SquareColor2 == 1) {
+            [Square2 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square2 setImage:img];
+        } else {
+            if (SquareColor2 == 2) {
+                [Square2 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square2 setImage:img];
+            } else {
+                if (SquareColor2 == 3) {
+                    [Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square2 setImage:img];
+                } else {
+                    [Square2 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square2 setImage:img];
+                }
+            }
+        }
+    }
+    
     if (ColorSquare == 2){
             ColorSquare = rand()% 4+1;
-        [self Randomiser];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser) userInfo:nil repeats:NO];
 Left = Left - 1;
         SquaresLeft.text = [NSString stringWithFormat:@"%i", Left];
         if (Left == 0) {
@@ -33640,9 +34274,64 @@ Left = Left - 1;
     }
 }
 -(IBAction)Square3:(id)sender{
+    if (ColorSquare == 3) {
+        if (ColorPicker == 1) {
+            [Square3 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square3 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [Square3 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square3 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square3 setImage:img];
+                } else {
+                    [Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square3 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (SquareColor3 == 1) {
+            [Square3 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square3 setImage:img];
+        } else {
+            if (SquareColor3 == 2) {
+                [Square3 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square3 setImage:img];
+            } else {
+                if (SquareColor3 == 3) {
+                    [Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square3 setImage:img];
+                } else {
+                    [Square3 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square3 setImage:img];
+                }
+            }
+        }
+    }
+    
+    
     if (ColorSquare == 3){
             ColorSquare = rand()% 4+1;
-        [self Randomiser];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser) userInfo:nil repeats:NO];
 Left = Left - 1;
         SquaresLeft.text = [NSString stringWithFormat:@"%i", Left];
         if (Left == 0) {
@@ -34227,9 +34916,63 @@ Left = Left - 1;
     }
 }
 -(IBAction)Square4:(id)sender{
+    if (ColorSquare == 4) {
+        if (ColorPicker == 1) {
+            [Square4 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square4 setImage:img];
+        } else {
+            if (ColorPicker == 2) {
+                [Square4 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square4 setImage:img];
+            } else {
+                if (ColorPicker == 3) {
+                    [Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square4 setImage:img];
+                } else {
+                    [Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square4 setImage:img];
+                }
+            }
+        }
+    } else {
+        if (SquareColor4 == 1) {
+            [Square4 stopAnimating];
+            
+            UIImage *img = [UIImage imageNamed:@"greendown.jpg"];
+            [Square4 setImage:img];
+        } else {
+            if (SquareColor4 == 2) {
+                [Square4 stopAnimating];
+                
+                UIImage *img = [UIImage imageNamed:@"redown.jpg"];
+                [Square4 setImage:img];
+            } else {
+                if (SquareColor4 == 3) {
+                    [Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"yellowdown.jpg"];
+                    [Square4 setImage:img];
+                } else {
+                    [Square4 stopAnimating];
+                    
+                    UIImage *img = [UIImage imageNamed:@"bluedown.jpg"];
+                    [Square4 setImage:img];
+                }
+            }
+        }
+    }
+    
     if (ColorSquare == 4){
             ColorSquare = rand()% 4+1;
-        [self Randomiser];
+        [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(Randomiser) userInfo:nil repeats:NO];
 Left = Left - 1;
         SquaresLeft.text = [NSString stringWithFormat:@"%i", Left];
         if (Left == 0) {
@@ -35097,6 +35840,11 @@ Left = Left - 1;
         [TimeLeft invalidate];
         Lose.hidden = NO;
         Exit.hidden = NO;
+        SquareB1.hidden = YES;
+        SquareB2.hidden = YES;
+        SquareB3.hidden = YES;
+        SquareB4.hidden = YES;
+
     }
     
 
@@ -35184,7 +35932,7 @@ Left = Left - 1;
                             } else {
                                 if (level == 7) {
                                     TimeI = 15;
-                                    Left = 22;
+                                    Left = 28;
                                     lvlNum.text = @"8";
                                 } else {
                                     if (level == 8) {
@@ -35219,7 +35967,7 @@ Left = Left - 1;
                                                         } else {
                                                             if (level == 14) {
                                                                 TimeI = 8;
-                                                                Left = 15;
+                                                                Left = 18;
                                                                 lvlNum.text = @"15";
                                                             } else {
                                                                 if (level == 15) {
@@ -35229,22 +35977,22 @@ Left = Left - 1;
                                                                 } else {
                                                                     if (level == 16) {
                                                                         TimeI = 10;
-                                                                        Left = 17;
+                                                                        Left = 22;
                                                                         lvlNum.text = @"17";
                                                                     } else {
                                                                         if (level == 17) {
                                                                             TimeI = 15;
-                                                                            Left = 35;
+                                                                            Left = 30;
                                                                             lvlNum.text = @"18";
                                                                         } else {
                                                                             if (level == 18) {
                                                                                 TimeI = 15;
-                                                                                Left = 36;
+                                                                                Left = 31;
                                                                                 lvlNum.text = @"19";
                                                                             } else {
                                                                                 if (level == 19) {
                                                                                     TimeI = 15;
-                                                                                    Left = 37;
+                                                                                    Left = 32;
                                                                                     lvlNum.text = @"20";
                                                                                 } else {
                                                                                     if (level == 20) {
@@ -35254,22 +36002,22 @@ Left = Left - 1;
                                                                                     } else {
                                                                                         if (level == 21) {
                                                                                             TimeI = 10;
-                                                                                            Left = 20;
+                                                                                            Left = 22;
                                                                                             lvlNum.text = @"22";
                                                                                         } else {
                                                                                             if (level == 22) {
                                                                                                 TimeI = 21;
-                                                                                                Left = 42;
+                                                                                                Left = 44;
                                                                                                 lvlNum.text = @"23";
                                                                                             } else {
                                                                                                 if (level == 23) {
                                                                                                     TimeI = 21;
-                                                                                                    Left = 44;
+                                                                                                    Left = 45;
                                                                                                     lvlNum.text = @"24";
                                                                                                 } else {
                                                                                                     if (level == 24) {
-                                                                                                        TimeI = 22;
-                                                                                                        Left = 45;
+                                                                                                        TimeI = 23;
+                                                                                                        Left = 47;
                                                                                                         lvlNum.text = @"25";
                                                                                                     } else {
                                                                                                         if (level == 25) {
@@ -35283,13 +36031,13 @@ Left = Left - 1;
                                                                                                                 lvlNum.text = @"27";
                                                                                                             } else {
                                                                                                                 if (level == 27) {
-                                                                                                                    TimeI = 12;
-                                                                                                                    Left = 25;
+                                                                                                                    TimeI = 11;
+                                                                                                                    Left = 24;
                                                                                                                     lvlNum.text = @"28";
                                                                                                                 } else {
                                                                                                                     if (level == 28) {
                                                                                                                         TimeI = 14;
-                                                                                                                        Left = 30;
+                                                                                                                        Left = 31;
                                                                                                                         lvlNum.text = @"29";
                                                                                                                     } else {
                                                                                                                         if (level == 29) {
@@ -35321,14 +36069,17 @@ Left = Left - 1;
     
     
     
-    
-    
-    
-    
+}
+
+-(void) Adplz {
+    if ([self.interstitial isReady]) {
+        [self.interstitial presentFromRootViewController:self];
+    }
 }
 - (void)viewDidLoad {
     worldandlvl = [[NSUserDefaults standardUserDefaults] integerForKey:@"level"];
     world2andlvl = [[NSUserDefaults standardUserDefaults] integerForKey:@"level2"];
+    world3andlvl = [[NSUserDefaults standardUserDefaults] integerForKey:@"level3"];
 
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -35386,52 +36137,9 @@ Left = Left - 1;
         }
     }
     
-    WI1.animationImages = [NSArray arrayWithObjects:
-                            [UIImage imageNamed:@"Green.png"],
-                            [UIImage imageNamed:@"Red.png"],
-                           [UIImage imageNamed:@"Yellow.png"],
-                           [UIImage imageNamed:@"Purple.png"],
 
-                            nil];
-    [WI1 setAnimationRepeatCount:0];
-    WI1.animationDuration = 3.0;
-    [WI1 startAnimating];
-    
-    WI2.animationImages = [NSArray arrayWithObjects:
-                           [UIImage imageNamed:@"Purple.png"],
-                           [UIImage imageNamed:@"Green.png"],
-                           [UIImage imageNamed:@"Red.png"],
-                           [UIImage imageNamed:@"Yellow.png"],
-                           
-                           nil];
-    [WI2 setAnimationRepeatCount:0];
-    WI2.animationDuration = 3.0;
-    [WI2 startAnimating];
-    
-    WI3.animationImages = [NSArray arrayWithObjects:
-                           [UIImage imageNamed:@"Yellow.png"],
-                           [UIImage imageNamed:@"Purple.png"],
-                           [UIImage imageNamed:@"Green.png"],
-                           [UIImage imageNamed:@"Red.png"],
 
-                           
-                           nil];
-    [WI3 setAnimationRepeatCount:0];
-    WI3.animationDuration = 3.0;
-    [WI3 startAnimating];
-    
-    WI4.animationImages = [NSArray arrayWithObjects:
-                           [UIImage imageNamed:@"Red.png"],
-                           [UIImage imageNamed:@"Yellow.png"],
-                           [UIImage imageNamed:@"Purple.png"],
-                           [UIImage imageNamed:@"Green.png"],
 
-                           
-                           nil];
-    [WI4 setAnimationRepeatCount:0];
-    WI4.animationDuration = 3.0;
-    [WI4 startAnimating];
-    
     if (worldandlvl == 1) {
         BlrW2.hidden = YES;
     } else {
@@ -36542,7 +37250,1088 @@ Left = Left - 1;
             }
         }
     }
-    
+    if (world3andlvl == 1) {
+        Blr3W2.hidden = YES;
+    } else {
+        if (world3andlvl == 2) {
+            Blr3W2.hidden = YES;
+            Blr3W3.hidden = YES;
+        } else {
+            if (world3andlvl == 3) {
+                Blr3W2.hidden = YES;
+                Blr3W3.hidden = YES;
+                Blr3W4.hidden = YES;
+            } else {
+                if (world3andlvl == 4) {
+                    Blr3W2.hidden = YES;
+                    Blr3W3.hidden = YES;
+                    Blr3W4.hidden = YES;
+                    Blr3W5.hidden = YES;
+                } else {
+                    if (world3andlvl == 5) {
+                        Blr3W2.hidden = YES;
+                        Blr3W3.hidden = YES;
+                        Blr3W4.hidden = YES;
+                        Blr3W5.hidden = YES;
+                        Blr3W6.hidden = YES;
+                    } else {
+                        if (world3andlvl == 6) {
+                            Blr3W2.hidden = YES;
+                            Blr3W3.hidden = YES;
+                            Blr3W4.hidden = YES;
+                            Blr3W5.hidden = YES;
+                            Blr3W6.hidden = YES;
+                            Blr3W7.hidden = YES;
+                        } else {
+                            if (world3andlvl == 7) {
+                                Blr3W2.hidden = YES;
+                                Blr3W3.hidden = YES;
+                                Blr3W4.hidden = YES;
+                                Blr3W5.hidden = YES;
+                                Blr3W6.hidden = YES;
+                                Blr3W7.hidden = YES;
+                                Blr3W8.hidden = YES;
+                            } else {
+                                if (world3andlvl == 8) {
+                                    Blr3W2.hidden = YES;
+                                    Blr3W3.hidden = YES;
+                                    Blr3W4.hidden = YES;
+                                    Blr3W5.hidden = YES;
+                                    Blr3W6.hidden = YES;
+                                    Blr3W7.hidden = YES;
+                                    Blr3W8.hidden = YES;
+                                    Blr3W9.hidden = YES;
+                                } else {
+                                    if (world3andlvl == 9) {
+                                        Blr3W2.hidden = YES;
+                                        Blr3W3.hidden = YES;
+                                        Blr3W4.hidden = YES;
+                                        Blr3W5.hidden = YES;
+                                        Blr3W6.hidden = YES;
+                                        Blr3W7.hidden = YES;
+                                        Blr3W8.hidden = YES;
+                                        Blr3W9.hidden = YES;
+                                        Blr3W10.hidden = YES;
+                                    } else {
+                                        if (world3andlvl == 10) {
+                                            Blr3W2.hidden = YES;
+                                            Blr3W3.hidden = YES;
+                                            Blr3W4.hidden = YES;
+                                            Blr3W5.hidden = YES;
+                                            Blr3W6.hidden = YES;
+                                            Blr3W7.hidden = YES;
+                                            Blr3W8.hidden = YES;
+                                            Blr3W9.hidden = YES;
+                                            Blr3W10.hidden = YES;
+                                            Blr3W11.hidden = YES;
+                                        } else {
+                                            if (world3andlvl == 11) {
+                                                Blr3W2.hidden = YES;
+                                                Blr3W3.hidden = YES;
+                                                Blr3W4.hidden = YES;
+                                                Blr3W5.hidden = YES;
+                                                Blr3W6.hidden = YES;
+                                                Blr3W7.hidden = YES;
+                                                Blr3W8.hidden = YES;
+                                                Blr3W9.hidden = YES;
+                                                Blr3W10.hidden = YES;
+                                                Blr3W11.hidden = YES;
+                                                Blr3W12.hidden = YES;
+                                            } else {
+                                                if (world3andlvl == 12) {
+                                                    Blr3W2.hidden = YES;
+                                                    Blr3W3.hidden = YES;
+                                                    Blr3W4.hidden = YES;
+                                                    Blr3W5.hidden = YES;
+                                                    Blr3W6.hidden = YES;
+                                                    Blr3W7.hidden = YES;
+                                                    Blr3W8.hidden = YES;
+                                                    Blr3W9.hidden = YES;
+                                                    Blr3W10.hidden = YES;
+                                                    Blr3W11.hidden = YES;
+                                                    Blr3W12.hidden = YES;
+                                                    Blr3W13.hidden = YES;
+                                                } else {
+                                                    if (world3andlvl == 13) {
+                                                        Blr3W2.hidden = YES;
+                                                        Blr3W3.hidden = YES;
+                                                        Blr3W4.hidden = YES;
+                                                        Blr3W5.hidden = YES;
+                                                        Blr3W6.hidden = YES;
+                                                        Blr3W7.hidden = YES;
+                                                        Blr3W8.hidden = YES;
+                                                        Blr3W9.hidden = YES;
+                                                        Blr3W10.hidden = YES;
+                                                        Blr3W11.hidden = YES;
+                                                        Blr3W12.hidden = YES;
+                                                        Blr3W13.hidden = YES;
+                                                        Blr3W14.hidden = YES;
+                                                    } else {
+                                                        if (world3andlvl == 14) {
+                                                            Blr3W2.hidden = YES;
+                                                            Blr3W3.hidden = YES;
+                                                            Blr3W4.hidden = YES;
+                                                            Blr3W5.hidden = YES;
+                                                            Blr3W6.hidden = YES;
+                                                            Blr3W7.hidden = YES;
+                                                            Blr3W8.hidden = YES;
+                                                            Blr3W9.hidden = YES;
+                                                            Blr3W10.hidden = YES;
+                                                            Blr3W11.hidden = YES;
+                                                            Blr3W12.hidden = YES;
+                                                            Blr3W13.hidden = YES;
+                                                            Blr3W14.hidden = YES;
+                                                            Blr3W15.hidden = YES;
+                                                        } else {
+                                                            if (world3andlvl == 15) {
+                                                                Blr3W2.hidden = YES;
+                                                                Blr3W3.hidden = YES;
+                                                                Blr3W4.hidden = YES;
+                                                                Blr3W5.hidden = YES;
+                                                                Blr3W6.hidden = YES;
+                                                                Blr3W7.hidden = YES;
+                                                                Blr3W8.hidden = YES;
+                                                                Blr3W9.hidden = YES;
+                                                                Blr3W10.hidden = YES;
+                                                                Blr3W11.hidden = YES;
+                                                                Blr3W12.hidden = YES;
+                                                                Blr3W13.hidden = YES;
+                                                                Blr3W14.hidden = YES;
+                                                                Blr3W15.hidden = YES;
+                                                                Blr3W16.hidden = YES;
+                                                            } else {
+                                                                if (world3andlvl == 16) {
+                                                                    Blr3W2.hidden = YES;
+                                                                    Blr3W3.hidden = YES;
+                                                                    Blr3W4.hidden = YES;
+                                                                    Blr3W5.hidden = YES;
+                                                                    Blr3W6.hidden = YES;
+                                                                    Blr3W7.hidden = YES;
+                                                                    Blr3W8.hidden = YES;
+                                                                    Blr3W9.hidden = YES;
+                                                                    Blr3W10.hidden = YES;
+                                                                    Blr3W11.hidden = YES;
+                                                                    Blr3W12.hidden = YES;
+                                                                    Blr3W13.hidden = YES;
+                                                                    Blr3W14.hidden = YES;
+                                                                    Blr3W15.hidden = YES;
+                                                                    Blr3W16.hidden = YES;
+                                                                    Blr3W17.hidden = YES;
+                                                                } else {
+                                                                    if (world3andlvl == 17) {
+                                                                        Blr3W2.hidden = YES;
+                                                                        Blr3W3.hidden = YES;
+                                                                        Blr3W4.hidden = YES;
+                                                                        Blr3W5.hidden = YES;
+                                                                        Blr3W6.hidden = YES;
+                                                                        Blr3W7.hidden = YES;
+                                                                        Blr3W8.hidden = YES;
+                                                                        Blr3W9.hidden = YES;
+                                                                        Blr3W10.hidden = YES;
+                                                                        Blr3W11.hidden = YES;
+                                                                        Blr3W12.hidden = YES;
+                                                                        Blr3W13.hidden = YES;
+                                                                        Blr3W14.hidden = YES;
+                                                                        Blr3W15.hidden = YES;
+                                                                        Blr3W16.hidden = YES;
+                                                                        Blr3W17.hidden = YES;
+                                                                        Blr3W18.hidden = YES;
+                                                                    } else {
+                                                                        if (world3andlvl == 18) {
+                                                                            Blr3W2.hidden = YES;
+                                                                            Blr3W3.hidden = YES;
+                                                                            Blr3W4.hidden = YES;
+                                                                            Blr3W5.hidden = YES;
+                                                                            Blr3W6.hidden = YES;
+                                                                            Blr3W7.hidden = YES;
+                                                                            Blr3W8.hidden = YES;
+                                                                            Blr3W9.hidden = YES;
+                                                                            Blr3W10.hidden = YES;
+                                                                            Blr3W11.hidden = YES;
+                                                                            Blr3W12.hidden = YES;
+                                                                            Blr3W13.hidden = YES;
+                                                                            Blr3W14.hidden = YES;
+                                                                            Blr3W15.hidden = YES;
+                                                                            Blr3W16.hidden = YES;
+                                                                            Blr3W17.hidden = YES;
+                                                                            Blr3W18.hidden = YES;
+                                                                            Blr3W19.hidden = YES;
+                                                                        } else {
+                                                                            if (world3andlvl == 19) {
+                                                                                Blr3W2.hidden = YES;
+                                                                                Blr3W3.hidden = YES;
+                                                                                Blr3W4.hidden = YES;
+                                                                                Blr3W5.hidden = YES;
+                                                                                Blr3W6.hidden = YES;
+                                                                                Blr3W7.hidden = YES;
+                                                                                Blr3W8.hidden = YES;
+                                                                                Blr3W9.hidden = YES;
+                                                                                Blr3W10.hidden = YES;
+                                                                                Blr3W11.hidden = YES;
+                                                                                Blr3W12.hidden = YES;
+                                                                                Blr3W13.hidden = YES;
+                                                                                Blr3W14.hidden = YES;
+                                                                                Blr3W15.hidden = YES;
+                                                                                Blr3W16.hidden = YES;
+                                                                                Blr3W17.hidden = YES;
+                                                                                Blr3W18.hidden = YES;
+                                                                                Blr3W19.hidden = YES;
+                                                                                Blr3W20.hidden = YES;
+                                                                            } else {
+                                                                                if (world3andlvl == 20) {
+                                                                                    Blr3W2.hidden = YES;
+                                                                                    Blr3W3.hidden = YES;
+                                                                                    Blr3W4.hidden = YES;
+                                                                                    Blr3W5.hidden = YES;
+                                                                                    Blr3W6.hidden = YES;
+                                                                                    Blr3W7.hidden = YES;
+                                                                                    Blr3W8.hidden = YES;
+                                                                                    Blr3W9.hidden = YES;
+                                                                                    Blr3W10.hidden = YES;
+                                                                                    Blr3W11.hidden = YES;
+                                                                                    Blr3W12.hidden = YES;
+                                                                                    Blr3W13.hidden = YES;
+                                                                                    Blr3W14.hidden = YES;
+                                                                                    Blr3W15.hidden = YES;
+                                                                                    Blr3W16.hidden = YES;
+                                                                                    Blr3W17.hidden = YES;
+                                                                                    Blr3W18.hidden = YES;
+                                                                                    Blr3W19.hidden = YES;
+                                                                                    Blr3W20.hidden = YES;
+                                                                                    Blr3W21.hidden = YES;
+                                                                                } else {
+                                                                                    if (world3andlvl == 21) {
+                                                                                        Blr3W2.hidden = YES;
+                                                                                        Blr3W3.hidden = YES;
+                                                                                        Blr3W4.hidden = YES;
+                                                                                        Blr3W5.hidden = YES;
+                                                                                        Blr3W6.hidden = YES;
+                                                                                        Blr3W7.hidden = YES;
+                                                                                        Blr3W8.hidden = YES;
+                                                                                        Blr3W9.hidden = YES;
+                                                                                        Blr3W10.hidden = YES;
+                                                                                        Blr3W11.hidden = YES;
+                                                                                        Blr3W12.hidden = YES;
+                                                                                        Blr3W13.hidden = YES;
+                                                                                        Blr3W14.hidden = YES;
+                                                                                        Blr3W15.hidden = YES;
+                                                                                        Blr3W16.hidden = YES;
+                                                                                        Blr3W17.hidden = YES;
+                                                                                        Blr3W18.hidden = YES;
+                                                                                        Blr3W19.hidden = YES;
+                                                                                        Blr3W20.hidden = YES;
+                                                                                        Blr3W21.hidden = YES;
+                                                                                        Blr3W22.hidden = YES;
+                                                                                    } else
+                                                                                        if (world3andlvl == 22) {
+                                                                                            Blr3W2.hidden = YES;
+                                                                                            Blr3W3.hidden = YES;
+                                                                                            Blr3W4.hidden = YES;
+                                                                                            Blr3W5.hidden = YES;
+                                                                                            Blr3W6.hidden = YES;
+                                                                                            Blr3W7.hidden = YES;
+                                                                                            Blr3W8.hidden = YES;
+                                                                                            Blr3W9.hidden = YES;
+                                                                                            Blr3W10.hidden = YES;
+                                                                                            Blr3W11.hidden = YES;
+                                                                                            Blr3W12.hidden = YES;
+                                                                                            Blr3W13.hidden = YES;
+                                                                                            Blr3W14.hidden = YES;
+                                                                                            Blr3W15.hidden = YES;
+                                                                                            Blr3W16.hidden = YES;
+                                                                                            Blr3W17.hidden = YES;
+                                                                                            Blr3W18.hidden = YES;
+                                                                                            Blr3W19.hidden = YES;
+                                                                                            Blr3W20.hidden = YES;
+                                                                                            Blr3W21.hidden = YES;
+                                                                                            Blr3W22.hidden = YES;
+                                                                                            Blr3W23.hidden = YES;
+                                                                                        } else {
+                                                                                            if (world3andlvl == 23) {
+                                                                                                Blr3W2.hidden = YES;
+                                                                                                Blr3W3.hidden = YES;
+                                                                                                Blr3W4.hidden = YES;
+                                                                                                Blr3W5.hidden = YES;
+                                                                                                Blr3W6.hidden = YES;
+                                                                                                Blr3W7.hidden = YES;
+                                                                                                Blr3W8.hidden = YES;
+                                                                                                Blr3W9.hidden = YES;
+                                                                                                Blr3W10.hidden = YES;
+                                                                                                Blr3W11.hidden = YES;
+                                                                                                Blr3W12.hidden = YES;
+                                                                                                Blr3W13.hidden = YES;
+                                                                                                Blr3W14.hidden = YES;
+                                                                                                Blr3W15.hidden = YES;
+                                                                                                Blr3W16.hidden = YES;
+                                                                                                Blr3W17.hidden = YES;
+                                                                                                Blr3W18.hidden = YES;
+                                                                                                Blr3W19.hidden = YES;
+                                                                                                Blr3W20.hidden = YES;
+                                                                                                Blr3W21.hidden = YES;
+                                                                                                Blr3W22.hidden = YES;
+                                                                                                Blr3W23.hidden = YES;
+                                                                                                Blr3W24.hidden = YES;
+                                                                                            } else {
+                                                                                                if (world3andlvl == 24) {
+                                                                                                    Blr3W2.hidden = YES;
+                                                                                                    Blr3W3.hidden = YES;
+                                                                                                    Blr3W4.hidden = YES;
+                                                                                                    Blr3W5.hidden = YES;
+                                                                                                    Blr3W6.hidden = YES;
+                                                                                                    Blr3W7.hidden = YES;
+                                                                                                    Blr3W8.hidden = YES;
+                                                                                                    Blr3W9.hidden = YES;
+                                                                                                    Blr3W10.hidden = YES;
+                                                                                                    Blr3W11.hidden = YES;
+                                                                                                    Blr3W12.hidden = YES;
+                                                                                                    Blr3W13.hidden = YES;
+                                                                                                    Blr3W14.hidden = YES;
+                                                                                                    Blr3W15.hidden = YES;
+                                                                                                    Blr3W16.hidden = YES;
+                                                                                                    Blr3W17.hidden = YES;
+                                                                                                    Blr3W18.hidden = YES;
+                                                                                                    Blr3W19.hidden = YES;
+                                                                                                    Blr3W20.hidden = YES;
+                                                                                                    Blr3W21.hidden = YES;
+                                                                                                    Blr3W22.hidden = YES;
+                                                                                                    Blr3W23.hidden = YES;
+                                                                                                    Blr3W24.hidden = YES;
+                                                                                                    Blr3W25.hidden = YES;
+                                                                                                } else {
+                                                                                                    if (world3andlvl == 25) {
+                                                                                                        Blr3W2.hidden = YES;
+                                                                                                        Blr3W3.hidden = YES;
+                                                                                                        Blr3W4.hidden = YES;
+                                                                                                        Blr3W5.hidden = YES;
+                                                                                                        Blr3W6.hidden = YES;
+                                                                                                        Blr3W7.hidden = YES;
+                                                                                                        Blr3W8.hidden = YES;
+                                                                                                        Blr3W9.hidden = YES;
+                                                                                                        Blr3W10.hidden = YES;
+                                                                                                        Blr3W11.hidden = YES;
+                                                                                                        Blr3W12.hidden = YES;
+                                                                                                        Blr3W13.hidden = YES;
+                                                                                                        Blr3W14.hidden = YES;
+                                                                                                        Blr3W15.hidden = YES;
+                                                                                                        Blr3W16.hidden = YES;
+                                                                                                        Blr3W17.hidden = YES;
+                                                                                                        Blr3W18.hidden = YES;
+                                                                                                        Blr3W19.hidden = YES;
+                                                                                                        Blr3W20.hidden = YES;
+                                                                                                        Blr3W21.hidden = YES;
+                                                                                                        Blr3W22.hidden = YES;
+                                                                                                        Blr3W23.hidden = YES;
+                                                                                                        Blr3W24.hidden = YES;
+                                                                                                        Blr3W25.hidden = YES;
+                                                                                                        Blr3W26.hidden = YES;
+                                                                                                    } else {
+                                                                                                        if (world3andlvl == 26) {
+                                                                                                            Blr3W2.hidden = YES;
+                                                                                                            Blr3W3.hidden = YES;
+                                                                                                            Blr3W4.hidden = YES;
+                                                                                                            Blr3W5.hidden = YES;
+                                                                                                            Blr3W6.hidden = YES;
+                                                                                                            Blr3W7.hidden = YES;
+                                                                                                            Blr3W8.hidden = YES;
+                                                                                                            Blr3W9.hidden = YES;
+                                                                                                            Blr3W10.hidden = YES;
+                                                                                                            Blr3W11.hidden = YES;
+                                                                                                            Blr3W12.hidden = YES;
+                                                                                                            Blr3W13.hidden = YES;
+                                                                                                            Blr3W14.hidden = YES;
+                                                                                                            Blr3W15.hidden = YES;
+                                                                                                            Blr3W16.hidden = YES;
+                                                                                                            Blr3W17.hidden = YES;
+                                                                                                            Blr3W18.hidden = YES;
+                                                                                                            Blr3W19.hidden = YES;
+                                                                                                            Blr3W20.hidden = YES;
+                                                                                                            Blr3W21.hidden = YES;
+                                                                                                            Blr3W22.hidden = YES;
+                                                                                                            Blr3W23.hidden = YES;
+                                                                                                            Blr3W24.hidden = YES;
+                                                                                                            Blr3W25.hidden = YES;
+                                                                                                            Blr3W26.hidden = YES;
+                                                                                                            Blr3W27.hidden = YES;
+                                                                                                        } else {
+                                                                                                            if (world3andlvl == 27) {
+                                                                                                                Blr3W2.hidden = YES;
+                                                                                                                Blr3W3.hidden = YES;
+                                                                                                                Blr3W4.hidden = YES;
+                                                                                                                Blr3W5.hidden = YES;
+                                                                                                                Blr3W6.hidden = YES;
+                                                                                                                Blr3W7.hidden = YES;
+                                                                                                                Blr3W8.hidden = YES;
+                                                                                                                Blr3W9.hidden = YES;
+                                                                                                                Blr3W10.hidden = YES;
+                                                                                                                Blr3W11.hidden = YES;
+                                                                                                                Blr3W12.hidden = YES;
+                                                                                                                Blr3W13.hidden = YES;
+                                                                                                                Blr3W14.hidden = YES;
+                                                                                                                Blr3W15.hidden = YES;
+                                                                                                                Blr3W16.hidden = YES;
+                                                                                                                Blr3W17.hidden = YES;
+                                                                                                                Blr3W18.hidden = YES;
+                                                                                                                Blr3W19.hidden = YES;
+                                                                                                                Blr3W20.hidden = YES;
+                                                                                                                Blr3W21.hidden = YES;
+                                                                                                                Blr3W22.hidden = YES;
+                                                                                                                Blr3W23.hidden = YES;
+                                                                                                                Blr3W24.hidden = YES;
+                                                                                                                Blr3W25.hidden = YES;
+                                                                                                                Blr3W26.hidden = YES;
+                                                                                                                Blr3W27.hidden = YES;
+                                                                                                                Blr3W28.hidden = YES;
+                                                                                                            } else {
+                                                                                                                if (world3andlvl == 28) {
+                                                                                                                    Blr3W2.hidden = YES;
+                                                                                                                    Blr3W3.hidden = YES;
+                                                                                                                    Blr3W4.hidden = YES;
+                                                                                                                    Blr3W5.hidden = YES;
+                                                                                                                    Blr3W6.hidden = YES;
+                                                                                                                    Blr3W7.hidden = YES;
+                                                                                                                    Blr3W8.hidden = YES;
+                                                                                                                    Blr3W9.hidden = YES;
+                                                                                                                    Blr3W10.hidden = YES;
+                                                                                                                    Blr3W11.hidden = YES;
+                                                                                                                    Blr3W12.hidden = YES;
+                                                                                                                    Blr3W13.hidden = YES;
+                                                                                                                    Blr3W14.hidden = YES;
+                                                                                                                    Blr3W15.hidden = YES;
+                                                                                                                    Blr3W16.hidden = YES;
+                                                                                                                    Blr3W17.hidden = YES;
+                                                                                                                    Blr3W18.hidden = YES;
+                                                                                                                    Blr3W19.hidden = YES;
+                                                                                                                    Blr3W20.hidden = YES;
+                                                                                                                    Blr3W21.hidden = YES;
+                                                                                                                    Blr3W22.hidden = YES;
+                                                                                                                    Blr3W23.hidden = YES;
+                                                                                                                    Blr3W24.hidden = YES;
+                                                                                                                    Blr3W25.hidden = YES;
+                                                                                                                    Blr3W26.hidden = YES;
+                                                                                                                    Blr3W27.hidden = YES;
+                                                                                                                    Blr3W28.hidden = YES;
+                                                                                                                    Blr3W29.hidden = YES;
+                                                                                                                } else {
+                                                                                                                    if (world3andlvl == 29) {
+                                                                                                                        Blr3W2.hidden = YES;
+                                                                                                                        Blr3W3.hidden = YES;
+                                                                                                                        Blr3W4.hidden = YES;
+                                                                                                                        Blr3W5.hidden = YES;
+                                                                                                                        Blr3W6.hidden = YES;
+                                                                                                                        Blr3W7.hidden = YES;
+                                                                                                                        Blr3W8.hidden = YES;
+                                                                                                                        Blr3W9.hidden = YES;
+                                                                                                                        Blr3W10.hidden = YES;
+                                                                                                                        Blr3W11.hidden = YES;
+                                                                                                                        Blr3W12.hidden = YES;
+                                                                                                                        Blr3W13.hidden = YES;
+                                                                                                                        Blr3W14.hidden = YES;
+                                                                                                                        Blr3W15.hidden = YES;
+                                                                                                                        Blr3W16.hidden = YES;
+                                                                                                                        Blr3W17.hidden = YES;
+                                                                                                                        Blr3W18.hidden = YES;
+                                                                                                                        Blr3W19.hidden = YES;
+                                                                                                                        Blr3W20.hidden = YES;
+                                                                                                                        Blr3W21.hidden = YES;
+                                                                                                                        Blr3W22.hidden = YES;
+                                                                                                                        Blr3W23.hidden = YES;
+                                                                                                                        Blr3W24.hidden = YES;
+                                                                                                                        Blr3W25.hidden = YES;
+                                                                                                                        Blr3W26.hidden = YES;
+                                                                                                                        Blr3W27.hidden = YES;
+                                                                                                                        Blr3W28.hidden = YES;
+                                                                                                                        Blr3W29.hidden = YES;
+                                                                                                                        Blr3W30.hidden = YES;
+                                                                                                                    } else {
+                                                                                                                        if (world3andlvl == 30) {
+                                                                                                                            Blr3W2.hidden = YES;
+                                                                                                                            
+                                                                                                                        } else {
+                                                                                                                            
+                                                                                                                            
+                                                                                                                        }                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (worldandlvl == 1) {
+        BlrW2.hidden = YES;
+    } else {
+        if (worldandlvl == 2) {
+            BlrW2.hidden = YES;
+            BlrW3.hidden = YES;
+        } else {
+            if (worldandlvl == 3) {
+                BlrW2.hidden = YES;
+                BlrW3.hidden = YES;
+                BlrW4.hidden = YES;
+            } else {
+                if (worldandlvl == 4) {
+                    BlrW2.hidden = YES;
+                    BlrW3.hidden = YES;
+                    BlrW4.hidden = YES;
+                    BlrW5.hidden = YES;
+                } else {
+                    if (worldandlvl == 5) {
+                        BlrW2.hidden = YES;
+                        BlrW3.hidden = YES;
+                        BlrW4.hidden = YES;
+                        BlrW5.hidden = YES;
+                        BlrW6.hidden = YES;
+                    } else {
+                        if (worldandlvl == 6) {
+                            BlrW2.hidden = YES;
+                            BlrW3.hidden = YES;
+                            BlrW4.hidden = YES;
+                            BlrW5.hidden = YES;
+                            BlrW6.hidden = YES;
+                            BlrW7.hidden = YES;
+                        } else {
+                            if (worldandlvl == 7) {
+                                BlrW2.hidden = YES;
+                                BlrW3.hidden = YES;
+                                BlrW4.hidden = YES;
+                                BlrW5.hidden = YES;
+                                BlrW6.hidden = YES;
+                                BlrW7.hidden = YES;
+                                BlrW8.hidden = YES;
+                            } else {
+                                if (worldandlvl == 8) {
+                                    BlrW2.hidden = YES;
+                                    BlrW3.hidden = YES;
+                                    BlrW4.hidden = YES;
+                                    BlrW5.hidden = YES;
+                                    BlrW6.hidden = YES;
+                                    BlrW7.hidden = YES;
+                                    BlrW8.hidden = YES;
+                                    BlrW9.hidden = YES;
+                                } else {
+                                    if (worldandlvl == 9) {
+                                        BlrW2.hidden = YES;
+                                        BlrW3.hidden = YES;
+                                        BlrW4.hidden = YES;
+                                        BlrW5.hidden = YES;
+                                        BlrW6.hidden = YES;
+                                        BlrW7.hidden = YES;
+                                        BlrW8.hidden = YES;
+                                        BlrW9.hidden = YES;
+                                        BlrW10.hidden = YES;
+                                    } else {
+                                        if (worldandlvl == 10) {
+                                            BlrW2.hidden = YES;
+                                            BlrW3.hidden = YES;
+                                            BlrW4.hidden = YES;
+                                            BlrW5.hidden = YES;
+                                            BlrW6.hidden = YES;
+                                            BlrW7.hidden = YES;
+                                            BlrW8.hidden = YES;
+                                            BlrW9.hidden = YES;
+                                            BlrW10.hidden = YES;
+                                            BlrW11.hidden = YES;
+                                        } else {
+                                            if (worldandlvl == 11) {
+                                                BlrW2.hidden = YES;
+                                                BlrW3.hidden = YES;
+                                                BlrW4.hidden = YES;
+                                                BlrW5.hidden = YES;
+                                                BlrW6.hidden = YES;
+                                                BlrW7.hidden = YES;
+                                                BlrW8.hidden = YES;
+                                                BlrW9.hidden = YES;
+                                                BlrW10.hidden = YES;
+                                                BlrW11.hidden = YES;
+                                                BlrW12.hidden = YES;
+                                            } else {
+                                                if (worldandlvl == 12) {
+                                                    BlrW2.hidden = YES;
+                                                    BlrW3.hidden = YES;
+                                                    BlrW4.hidden = YES;
+                                                    BlrW5.hidden = YES;
+                                                    BlrW6.hidden = YES;
+                                                    BlrW7.hidden = YES;
+                                                    BlrW8.hidden = YES;
+                                                    BlrW9.hidden = YES;
+                                                    BlrW10.hidden = YES;
+                                                    BlrW11.hidden = YES;
+                                                    BlrW12.hidden = YES;
+                                                    BlrW13.hidden = YES;
+                                                } else {
+                                                    if (worldandlvl == 13) {
+                                                        BlrW2.hidden = YES;
+                                                        BlrW3.hidden = YES;
+                                                        BlrW4.hidden = YES;
+                                                        BlrW5.hidden = YES;
+                                                        BlrW6.hidden = YES;
+                                                        BlrW7.hidden = YES;
+                                                        BlrW8.hidden = YES;
+                                                        BlrW9.hidden = YES;
+                                                        BlrW10.hidden = YES;
+                                                        BlrW11.hidden = YES;
+                                                        BlrW12.hidden = YES;
+                                                        BlrW13.hidden = YES;
+                                                        BlrW14.hidden = YES;
+                                                    } else {
+                                                        if (worldandlvl == 14) {
+                                                            BlrW2.hidden = YES;
+                                                            BlrW3.hidden = YES;
+                                                            BlrW4.hidden = YES;
+                                                            BlrW5.hidden = YES;
+                                                            BlrW6.hidden = YES;
+                                                            BlrW7.hidden = YES;
+                                                            BlrW8.hidden = YES;
+                                                            BlrW9.hidden = YES;
+                                                            BlrW10.hidden = YES;
+                                                            BlrW11.hidden = YES;
+                                                            BlrW12.hidden = YES;
+                                                            BlrW13.hidden = YES;
+                                                            BlrW14.hidden = YES;
+                                                            BlrW15.hidden = YES;
+                                                        } else {
+                                                            if (worldandlvl == 15) {
+                                                                BlrW2.hidden = YES;
+                                                                BlrW3.hidden = YES;
+                                                                BlrW4.hidden = YES;
+                                                                BlrW5.hidden = YES;
+                                                                BlrW6.hidden = YES;
+                                                                BlrW7.hidden = YES;
+                                                                BlrW8.hidden = YES;
+                                                                BlrW9.hidden = YES;
+                                                                BlrW10.hidden = YES;
+                                                                BlrW11.hidden = YES;
+                                                                BlrW12.hidden = YES;
+                                                                BlrW13.hidden = YES;
+                                                                BlrW14.hidden = YES;
+                                                                BlrW15.hidden = YES;
+                                                                BlrW16.hidden = YES;
+                                                            } else {
+                                                                if (worldandlvl == 16) {
+                                                                    BlrW2.hidden = YES;
+                                                                    BlrW3.hidden = YES;
+                                                                    BlrW4.hidden = YES;
+                                                                    BlrW5.hidden = YES;
+                                                                    BlrW6.hidden = YES;
+                                                                    BlrW7.hidden = YES;
+                                                                    BlrW8.hidden = YES;
+                                                                    BlrW9.hidden = YES;
+                                                                    BlrW10.hidden = YES;
+                                                                    BlrW11.hidden = YES;
+                                                                    BlrW12.hidden = YES;
+                                                                    BlrW13.hidden = YES;
+                                                                    BlrW14.hidden = YES;
+                                                                    BlrW15.hidden = YES;
+                                                                    BlrW16.hidden = YES;
+                                                                    BlrW17.hidden = YES;
+                                                                } else {
+                                                                    if (worldandlvl == 17) {
+                                                                        BlrW2.hidden = YES;
+                                                                        BlrW3.hidden = YES;
+                                                                        BlrW4.hidden = YES;
+                                                                        BlrW5.hidden = YES;
+                                                                        BlrW6.hidden = YES;
+                                                                        BlrW7.hidden = YES;
+                                                                        BlrW8.hidden = YES;
+                                                                        BlrW9.hidden = YES;
+                                                                        BlrW10.hidden = YES;
+                                                                        BlrW11.hidden = YES;
+                                                                        BlrW12.hidden = YES;
+                                                                        BlrW13.hidden = YES;
+                                                                        BlrW14.hidden = YES;
+                                                                        BlrW15.hidden = YES;
+                                                                        BlrW16.hidden = YES;
+                                                                        BlrW17.hidden = YES;
+                                                                        BlrW18.hidden = YES;
+                                                                    } else {
+                                                                        if (worldandlvl == 18) {
+                                                                            BlrW2.hidden = YES;
+                                                                            BlrW3.hidden = YES;
+                                                                            BlrW4.hidden = YES;
+                                                                            BlrW5.hidden = YES;
+                                                                            BlrW6.hidden = YES;
+                                                                            BlrW7.hidden = YES;
+                                                                            BlrW8.hidden = YES;
+                                                                            BlrW9.hidden = YES;
+                                                                            BlrW10.hidden = YES;
+                                                                            BlrW11.hidden = YES;
+                                                                            BlrW12.hidden = YES;
+                                                                            BlrW13.hidden = YES;
+                                                                            BlrW14.hidden = YES;
+                                                                            BlrW15.hidden = YES;
+                                                                            BlrW16.hidden = YES;
+                                                                            BlrW17.hidden = YES;
+                                                                            BlrW18.hidden = YES;
+                                                                            BlrW19.hidden = YES;
+                                                                        } else {
+                                                                            if (worldandlvl == 19) {
+                                                                                BlrW2.hidden = YES;
+                                                                                BlrW3.hidden = YES;
+                                                                                BlrW4.hidden = YES;
+                                                                                BlrW5.hidden = YES;
+                                                                                BlrW6.hidden = YES;
+                                                                                BlrW7.hidden = YES;
+                                                                                BlrW8.hidden = YES;
+                                                                                BlrW9.hidden = YES;
+                                                                                BlrW10.hidden = YES;
+                                                                                BlrW11.hidden = YES;
+                                                                                BlrW12.hidden = YES;
+                                                                                BlrW13.hidden = YES;
+                                                                                BlrW14.hidden = YES;
+                                                                                BlrW15.hidden = YES;
+                                                                                BlrW16.hidden = YES;
+                                                                                BlrW17.hidden = YES;
+                                                                                BlrW18.hidden = YES;
+                                                                                BlrW19.hidden = YES;
+                                                                                BlrW20.hidden = YES;
+                                                                            } else {
+                                                                                if (worldandlvl == 20) {
+                                                                                    BlrW2.hidden = YES;
+                                                                                    BlrW3.hidden = YES;
+                                                                                    BlrW4.hidden = YES;
+                                                                                    BlrW5.hidden = YES;
+                                                                                    BlrW6.hidden = YES;
+                                                                                    BlrW7.hidden = YES;
+                                                                                    BlrW8.hidden = YES;
+                                                                                    BlrW9.hidden = YES;
+                                                                                    BlrW10.hidden = YES;
+                                                                                    BlrW11.hidden = YES;
+                                                                                    BlrW12.hidden = YES;
+                                                                                    BlrW13.hidden = YES;
+                                                                                    BlrW14.hidden = YES;
+                                                                                    BlrW15.hidden = YES;
+                                                                                    BlrW16.hidden = YES;
+                                                                                    BlrW17.hidden = YES;
+                                                                                    BlrW18.hidden = YES;
+                                                                                    BlrW19.hidden = YES;
+                                                                                    BlrW20.hidden = YES;
+                                                                                    BlrW21.hidden = YES;
+                                                                                } else {
+                                                                                    if (worldandlvl == 21) {
+                                                                                        BlrW2.hidden = YES;
+                                                                                        BlrW3.hidden = YES;
+                                                                                        BlrW4.hidden = YES;
+                                                                                        BlrW5.hidden = YES;
+                                                                                        BlrW6.hidden = YES;
+                                                                                        BlrW7.hidden = YES;
+                                                                                        BlrW8.hidden = YES;
+                                                                                        BlrW9.hidden = YES;
+                                                                                        BlrW10.hidden = YES;
+                                                                                        BlrW11.hidden = YES;
+                                                                                        BlrW12.hidden = YES;
+                                                                                        BlrW13.hidden = YES;
+                                                                                        BlrW14.hidden = YES;
+                                                                                        BlrW15.hidden = YES;
+                                                                                        BlrW16.hidden = YES;
+                                                                                        BlrW17.hidden = YES;
+                                                                                        BlrW18.hidden = YES;
+                                                                                        BlrW19.hidden = YES;
+                                                                                        BlrW20.hidden = YES;
+                                                                                        BlrW21.hidden = YES;
+                                                                                        BlrW22.hidden = YES;
+                                                                                    } else {
+                                                                                        if (worldandlvl == 22) {
+                                                                                            BlrW2.hidden = YES;
+                                                                                            BlrW3.hidden = YES;
+                                                                                            BlrW4.hidden = YES;
+                                                                                            BlrW5.hidden = YES;
+                                                                                            BlrW6.hidden = YES;
+                                                                                            BlrW7.hidden = YES;
+                                                                                            BlrW8.hidden = YES;
+                                                                                            BlrW9.hidden = YES;
+                                                                                            BlrW10.hidden = YES;
+                                                                                            BlrW11.hidden = YES;
+                                                                                            BlrW12.hidden = YES;
+                                                                                            BlrW13.hidden = YES;
+                                                                                            BlrW14.hidden = YES;
+                                                                                            BlrW15.hidden = YES;
+                                                                                            BlrW16.hidden = YES;
+                                                                                            BlrW17.hidden = YES;
+                                                                                            BlrW18.hidden = YES;
+                                                                                            BlrW19.hidden = YES;
+                                                                                            BlrW20.hidden = YES;
+                                                                                            BlrW21.hidden = YES;
+                                                                                            BlrW22.hidden = YES;
+                                                                                            BlrW23.hidden = YES;
+                                                                                        } else {
+                                                                                            if (worldandlvl == 23) {
+                                                                                                BlrW2.hidden = YES;
+                                                                                                BlrW3.hidden = YES;
+                                                                                                BlrW4.hidden = YES;
+                                                                                                BlrW5.hidden = YES;
+                                                                                                BlrW6.hidden = YES;
+                                                                                                BlrW7.hidden = YES;
+                                                                                                BlrW8.hidden = YES;
+                                                                                                BlrW9.hidden = YES;
+                                                                                                BlrW10.hidden = YES;
+                                                                                                BlrW11.hidden = YES;
+                                                                                                BlrW12.hidden = YES;
+                                                                                                BlrW13.hidden = YES;
+                                                                                                BlrW14.hidden = YES;
+                                                                                                BlrW15.hidden = YES;
+                                                                                                BlrW16.hidden = YES;
+                                                                                                BlrW17.hidden = YES;
+                                                                                                BlrW18.hidden = YES;
+                                                                                                BlrW19.hidden = YES;
+                                                                                                BlrW20.hidden = YES;
+                                                                                                BlrW21.hidden = YES;
+                                                                                                BlrW22.hidden = YES;
+                                                                                                BlrW23.hidden = YES;
+                                                                                                BlrW24.hidden = YES;
+                                                                                            } else {
+                                                                                                if (worldandlvl == 24) {
+                                                                                                    BlrW2.hidden = YES;
+                                                                                                    BlrW3.hidden = YES;
+                                                                                                    BlrW4.hidden = YES;
+                                                                                                    BlrW5.hidden = YES;
+                                                                                                    BlrW6.hidden = YES;
+                                                                                                    BlrW7.hidden = YES;
+                                                                                                    BlrW8.hidden = YES;
+                                                                                                    BlrW9.hidden = YES;
+                                                                                                    BlrW10.hidden = YES;
+                                                                                                    BlrW11.hidden = YES;
+                                                                                                    BlrW12.hidden = YES;
+                                                                                                    BlrW13.hidden = YES;
+                                                                                                    BlrW14.hidden = YES;
+                                                                                                    BlrW15.hidden = YES;
+                                                                                                    BlrW16.hidden = YES;
+                                                                                                    BlrW17.hidden = YES;
+                                                                                                    BlrW18.hidden = YES;
+                                                                                                    BlrW19.hidden = YES;
+                                                                                                    BlrW20.hidden = YES;
+                                                                                                    BlrW21.hidden = YES;
+                                                                                                    BlrW22.hidden = YES;
+                                                                                                    BlrW23.hidden = YES;
+                                                                                                    BlrW24.hidden = YES;
+                                                                                                    BlrW25.hidden = YES;
+                                                                                                } else {
+                                                                                                    if (worldandlvl == 25) {
+                                                                                                        BlrW2.hidden = YES;
+                                                                                                        BlrW3.hidden = YES;
+                                                                                                        BlrW4.hidden = YES;
+                                                                                                        BlrW5.hidden = YES;
+                                                                                                        BlrW6.hidden = YES;
+                                                                                                        BlrW7.hidden = YES;
+                                                                                                        BlrW8.hidden = YES;
+                                                                                                        BlrW9.hidden = YES;
+                                                                                                        BlrW10.hidden = YES;
+                                                                                                        BlrW11.hidden = YES;
+                                                                                                        BlrW12.hidden = YES;
+                                                                                                        BlrW13.hidden = YES;
+                                                                                                        BlrW14.hidden = YES;
+                                                                                                        BlrW15.hidden = YES;
+                                                                                                        BlrW16.hidden = YES;
+                                                                                                        BlrW17.hidden = YES;
+                                                                                                        BlrW18.hidden = YES;
+                                                                                                        BlrW19.hidden = YES;
+                                                                                                        BlrW20.hidden = YES;
+                                                                                                        BlrW21.hidden = YES;
+                                                                                                        BlrW22.hidden = YES;
+                                                                                                        BlrW23.hidden = YES;
+                                                                                                        BlrW24.hidden = YES;
+                                                                                                        BlrW25.hidden = YES;
+                                                                                                        BlrW26.hidden = YES;
+                                                                                                    } else {
+                                                                                                        if (worldandlvl == 26) {
+                                                                                                            BlrW2.hidden = YES;
+                                                                                                            BlrW3.hidden = YES;
+                                                                                                            BlrW4.hidden = YES;
+                                                                                                            BlrW5.hidden = YES;
+                                                                                                            BlrW6.hidden = YES;
+                                                                                                            BlrW7.hidden = YES;
+                                                                                                            BlrW8.hidden = YES;
+                                                                                                            BlrW9.hidden = YES;
+                                                                                                            BlrW10.hidden = YES;
+                                                                                                            BlrW11.hidden = YES;
+                                                                                                            BlrW12.hidden = YES;
+                                                                                                            BlrW13.hidden = YES;
+                                                                                                            BlrW14.hidden = YES;
+                                                                                                            BlrW15.hidden = YES;
+                                                                                                            BlrW16.hidden = YES;
+                                                                                                            BlrW17.hidden = YES;
+                                                                                                            BlrW18.hidden = YES;
+                                                                                                            BlrW19.hidden = YES;
+                                                                                                            BlrW20.hidden = YES;
+                                                                                                            BlrW21.hidden = YES;
+                                                                                                            BlrW22.hidden = YES;
+                                                                                                            BlrW23.hidden = YES;
+                                                                                                            BlrW24.hidden = YES;
+                                                                                                            BlrW25.hidden = YES;
+                                                                                                            BlrW26.hidden = YES;
+                                                                                                            BlrW27.hidden = YES;
+                                                                                                        } else {
+                                                                                                            if (worldandlvl == 27) {
+                                                                                                                BlrW2.hidden = YES;
+                                                                                                                BlrW3.hidden = YES;
+                                                                                                                BlrW4.hidden = YES;
+                                                                                                                BlrW5.hidden = YES;
+                                                                                                                BlrW6.hidden = YES;
+                                                                                                                BlrW7.hidden = YES;
+                                                                                                                BlrW8.hidden = YES;
+                                                                                                                BlrW9.hidden = YES;
+                                                                                                                BlrW10.hidden = YES;
+                                                                                                                BlrW11.hidden = YES;
+                                                                                                                BlrW12.hidden = YES;
+                                                                                                                BlrW13.hidden = YES;
+                                                                                                                BlrW14.hidden = YES;
+                                                                                                                BlrW15.hidden = YES;
+                                                                                                                BlrW16.hidden = YES;
+                                                                                                                BlrW17.hidden = YES;
+                                                                                                                BlrW18.hidden = YES;
+                                                                                                                BlrW19.hidden = YES;
+                                                                                                                BlrW20.hidden = YES;
+                                                                                                                BlrW21.hidden = YES;
+                                                                                                                BlrW22.hidden = YES;
+                                                                                                                BlrW23.hidden = YES;
+                                                                                                                BlrW24.hidden = YES;
+                                                                                                                BlrW25.hidden = YES;
+                                                                                                                BlrW26.hidden = YES;
+                                                                                                                BlrW27.hidden = YES;
+                                                                                                                BlrW28.hidden = YES;
+                                                                                                            } else {
+                                                                                                                if (worldandlvl == 28) {
+                                                                                                                    BlrW2.hidden = YES;
+                                                                                                                    BlrW3.hidden = YES;
+                                                                                                                    BlrW4.hidden = YES;
+                                                                                                                    BlrW5.hidden = YES;
+                                                                                                                    BlrW6.hidden = YES;
+                                                                                                                    BlrW7.hidden = YES;
+                                                                                                                    BlrW8.hidden = YES;
+                                                                                                                    BlrW9.hidden = YES;
+                                                                                                                    BlrW10.hidden = YES;
+                                                                                                                    BlrW11.hidden = YES;
+                                                                                                                    BlrW12.hidden = YES;
+                                                                                                                    BlrW13.hidden = YES;
+                                                                                                                    BlrW14.hidden = YES;
+                                                                                                                    BlrW15.hidden = YES;
+                                                                                                                    BlrW16.hidden = YES;
+                                                                                                                    BlrW17.hidden = YES;
+                                                                                                                    BlrW18.hidden = YES;
+                                                                                                                    BlrW19.hidden = YES;
+                                                                                                                    BlrW20.hidden = YES;
+                                                                                                                    BlrW21.hidden = YES;
+                                                                                                                    BlrW22.hidden = YES;
+                                                                                                                    BlrW23.hidden = YES;
+                                                                                                                    BlrW24.hidden = YES;
+                                                                                                                    BlrW25.hidden = YES;
+                                                                                                                    BlrW26.hidden = YES;
+                                                                                                                    BlrW27.hidden = YES;
+                                                                                                                    BlrW28.hidden = YES;
+                                                                                                                    BlrW29.hidden = YES;
+                                                                                                                } else {
+                                                                                                                    if (worldandlvl == 29) {
+                                                                                                                        BlrW2.hidden = YES;
+                                                                                                                        BlrW3.hidden = YES;
+                                                                                                                        BlrW4.hidden = YES;
+                                                                                                                        BlrW5.hidden = YES;
+                                                                                                                        BlrW6.hidden = YES;
+                                                                                                                        BlrW7.hidden = YES;
+                                                                                                                        BlrW8.hidden = YES;
+                                                                                                                        BlrW9.hidden = YES;
+                                                                                                                        BlrW10.hidden = YES;
+                                                                                                                        BlrW11.hidden = YES;
+                                                                                                                        BlrW12.hidden = YES;
+                                                                                                                        BlrW13.hidden = YES;
+                                                                                                                        BlrW14.hidden = YES;
+                                                                                                                        BlrW15.hidden = YES;
+                                                                                                                        BlrW16.hidden = YES;
+                                                                                                                        BlrW17.hidden = YES;
+                                                                                                                        BlrW18.hidden = YES;
+                                                                                                                        BlrW19.hidden = YES;
+                                                                                                                        BlrW20.hidden = YES;
+                                                                                                                        BlrW21.hidden = YES;
+                                                                                                                        BlrW22.hidden = YES;
+                                                                                                                        BlrW23.hidden = YES;
+                                                                                                                        BlrW24.hidden = YES;
+                                                                                                                        BlrW25.hidden = YES;
+                                                                                                                        BlrW26.hidden = YES;
+                                                                                                                        BlrW27.hidden = YES;
+                                                                                                                        BlrW28.hidden = YES;
+                                                                                                                        BlrW29.hidden = YES;
+                                                                                                                        BlrW30.hidden = YES;
+                                                                                                                    } else {
+                                                                                                                        if (worldandlvl == 30) {
+                                                                                                                            BlrW2.hidden = YES;
+                                                                                                                            BlrW3.hidden = YES;
+                                                                                                                            BlrW4.hidden = YES;
+                                                                                                                            BlrW5.hidden = YES;
+                                                                                                                            BlrW6.hidden = YES;
+                                                                                                                            BlrW7.hidden = YES;
+                                                                                                                            BlrW8.hidden = YES;
+                                                                                                                            BlrW9.hidden = YES;
+                                                                                                                            BlrW10.hidden = YES;
+                                                                                                                            BlrW11.hidden = YES;
+                                                                                                                            BlrW12.hidden = YES;
+                                                                                                                            BlrW13.hidden = YES;
+                                                                                                                            BlrW14.hidden = YES;
+                                                                                                                            BlrW15.hidden = YES;
+                                                                                                                            BlrW16.hidden = YES;
+                                                                                                                            BlrW17.hidden = YES;
+                                                                                                                            BlrW18.hidden = YES;
+                                                                                                                            BlrW19.hidden = YES;
+                                                                                                                            BlrW20.hidden = YES;
+                                                                                                                            BlrW21.hidden = YES;
+                                                                                                                            BlrW22.hidden = YES;
+                                                                                                                            BlrW23.hidden = YES;
+                                                                                                                            BlrW24.hidden = YES;
+                                                                                                                            BlrW25.hidden = YES;
+                                                                                                                            BlrW26.hidden = YES;
+                                                                                                                            BlrW27.hidden = YES;
+                                                                                                                            BlrW28.hidden = YES;
+                                                                                                                            BlrW29.hidden = YES;
+                                                                                                                            BlrW30.hidden = YES;
+                                                                                                                        } else {
+                                                                                                                            
+                                                                                                                            
+                                                                                                                        }                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     if (sel <= 2) {
         sel = sel + 1;
         if (sel == 0) {
@@ -36552,16 +38341,7 @@ Left = Left - 1;
             select1.hidden = NO;
             select2.hidden = YES;
             select3.hidden = YES;
-            if (worldandlvl == 29) {
-                right.hidden = NO;
-                rightlabel.hidden = NO;
-                
-            } else {
-                right.hidden = YES;
-                rightlabel.hidden = YES;
-                
-                
-            }
+
         } else {
             if (sel == 1) {
                 Worldst.text = @"World 2";
@@ -36572,16 +38352,7 @@ Left = Left - 1;
                 select1.hidden = YES;
                 select2.hidden = NO;
                 select3.hidden = YES;
-                if (world2andlvl == 29) {
-                    right.hidden = NO;
-                    rightlabel.hidden = NO;
-                    
-                } else {
-                    right.hidden = YES;
-                    rightlabel.hidden = YES;
-                    
-                    
-                }
+
             } else {
                 Worldst.text = @"World 3";
                 left.hidden = NO;
@@ -36594,8 +38365,89 @@ Left = Left - 1;
             }
         }
     }
+    sel = 0;
+    if (sel >= 0) {
+        sel = sel - 1;
+        if (sel == 2) {
+            [sel2 stopAnimating];
+            left.hidden = YES;
+            right.hidden = NO;
+            select1.hidden = YES;
+            select2.hidden = YES;
+            select3.hidden = NO;
+            UIImage *img = [UIImage imageNamed:@"world3sel.jpg"];
+            
+            [sel2 setImage:img];
+        }else{
+            if (sel == 1) {
+                [sel2 stopAnimating];
+                left.hidden = NO;
+                right.hidden = NO;
+                select1.hidden = YES;
+                select2.hidden = NO;
+                select3.hidden = YES;
+                UIImage *img = [UIImage imageNamed:@"world2sel.jpg"];
+                
+                [sel2 setImage:img];
+            } else {
+                
+                [sel2 stopAnimating];
+                left.hidden = YES;
+                right.hidden = NO;
+                select1.hidden = NO;
+                select2.hidden = YES;
+                select3.hidden = YES;
+                UIImage *img = [UIImage imageNamed:@"world1sel.jpg"];
+                sel = 0;
+                
+                [sel2 setImage:img];
+            }
+        }
+    }
+
+
+
+
+ 
+
+
+    self.interstitial = [self createAndLoadInterstitial];
+
+
 }
 
+- (GADInterstitial *)createAndLoadInterstitial {
+    GADInterstitial *interstitial = [[GADInterstitial alloc]
+                                     initWithAdUnitID:kInterstitialAdUnitID];
+    interstitial.delegate = self;
+    [interstitial loadRequest:[GADRequest request]];
+    return interstitial;
+}
+
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad {
+    self.interstitialButton.enabled = YES;
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)interstitial {
+    self.interstitial = [self createAndLoadInterstitial];
+}
+
+- (IBAction)didTapInterstitialButton:(id)sender {
+    if ([self.interstitial isReady]) {
+        [self.interstitial presentFromRootViewController:self];
+    }
+}
+
+#pragma mark - Interstitial delegate
+
+    - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error {
+        // Retrying failed interstitial loads is a rudimentary way of handling these errors.
+        // For more fine-grained error handling, take a look at the values in GADErrorCode.
+        self.interstitial = [self createAndLoadInterstitial];
+
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
