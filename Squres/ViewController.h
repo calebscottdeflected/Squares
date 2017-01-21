@@ -50,7 +50,7 @@ int W3SquareColor6;
 int W3SquareColor7;
 int W3SquareColor8;
 int W3SquareColor9;
-
+int jpeg;
 @interface ViewController : UIViewController{
     IBOutlet UIButton *left;
     IBOutlet UIButton *right;
