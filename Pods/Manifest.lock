@@ -1,0 +1,15 @@
+PODS:
+  - Flurry-iOS-SDK/FlurryAds (7.10.0):
+    - Flurry-iOS-SDK/FlurrySDK
+  - Flurry-iOS-SDK/FlurrySDK (7.10.0)
+
+DEPENDENCIES:
+  - Flurry-iOS-SDK/FlurryAds
+  - Flurry-iOS-SDK/FlurrySDK
+
+SPEC CHECKSUMS:
+  Flurry-iOS-SDK: e6975df9e57010d582bf9bed0f6312553cf24bc2
+
+PODFILE CHECKSUM: b5f455b53c09f3a6a8e9c907f6133a625010c917
+
+COCOAPODS: 1.2.0
